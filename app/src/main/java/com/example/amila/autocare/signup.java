@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
@@ -63,21 +65,21 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
         String password=editTextPassword.getText().toString().trim();
         String reenterpassword= this.editTextReenterpassword.getText().toString().trim();
         if(email.isEmpty()){
-            editTextemail.setError("Enter email!");
+            editTextemail.setError("Enter editTextemail!");
             editTextemail.requestFocus();
-            //Toast.makeText(getApplicationContext(), "Enter email!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Enter editTextemail!", Toast.LENGTH_LONG).show();
         }else if(!reenterpassword.equals(password)){
             Toast.makeText(getApplicationContext(), "Password Mismatch!", Toast.LENGTH_LONG).show();
         }else
         if(password.isEmpty()){
-            editTextPassword.setError("Enter a password!");
+            editTextPassword.setError("Enter a editTextPassword!");
             editTextPassword.requestFocus();
         }else
         if(reenterpassword.isEmpty()){
-            editTextReenterpassword.setError("Re enter password!");
+            editTextReenterpassword.setError("Re enter editTextPassword!");
             editTextReenterpassword.requestFocus();
         }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            editTextemail.setError("Enter a valid email");
+            editTextemail.setError("Enter a valid editTextemail");
             editTextemail.requestFocus();
         }else if(password.length()<8){
             editTextPassword.setError("minimum length should be 8");
@@ -95,8 +97,16 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
                                 //updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                                    Toast.makeText(getApplicationContext(), "Username already registered!!", Toast.LENGTH_LONG).show();
+
+                                }else if (task.getException() instanceof FirebaseAuthInvalidUserException){
+                                    Toast.makeText(getApplicationContext(), "Invalid User!!", Toast.LENGTH_LONG).show();
+
+                                }else{
+                                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+
+                                }
                                 //updateUI(null);
                             }
 
