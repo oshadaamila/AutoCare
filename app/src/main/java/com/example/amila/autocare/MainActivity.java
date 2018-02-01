@@ -58,11 +58,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                @Override
                public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                       Intent intent =   new Intent(getApplicationContext(),home.class);
+                       Intent intent =   new Intent(getApplicationContext(),profile.class);
                        startActivity(intent);
                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     }else{
-                        Toast.makeText(getApplicationContext(),task.getException().getMessage().toString(),Toast.LENGTH_SHORT);
+                        Toast.makeText(getApplicationContext(),task.getException().getMessage().toString(),Toast.LENGTH_SHORT).show();
                         Log.d("login","login task not successfull");
                     }
                }

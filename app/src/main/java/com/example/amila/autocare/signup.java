@@ -94,6 +94,9 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(getApplicationContext(), "User Registered Successfully!!", Toast.LENGTH_LONG).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                Intent intent =   new Intent(getApplicationContext(),profile.class);
+                                startActivity(intent);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 //updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
