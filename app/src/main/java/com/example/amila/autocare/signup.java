@@ -91,6 +91,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                finish();
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(getApplicationContext(), "User Registered Successfully!!", Toast.LENGTH_LONG).show();
                                 FirebaseUser user = mAuth.getCurrentUser();

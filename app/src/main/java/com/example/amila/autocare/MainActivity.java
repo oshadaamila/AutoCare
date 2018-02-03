@@ -20,14 +20,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextemail, editTextPassword;
     FirebaseAuth mAuth;
 
+    public MainActivity() {
+        mAuth = FirebaseAuth.getInstance();
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        editTextemail = findViewById(R.id.email);
-        editTextPassword = findViewById(R.id.password);
-        mAuth = FirebaseAuth.getInstance();
-        findViewById(R.id.textViewSignup).setOnClickListener(this);
-        findViewById(R.id.button).setOnClickListener(this);
+        if(mAuth.getCurrentUser()!=null){
+            finish();
+            startActivity(new Intent(this,home.class));
+        }else {
+            setContentView(R.layout.activity_main);
+            editTextemail = findViewById(R.id.email);
+            editTextPassword = findViewById(R.id.password);
+            findViewById(R.id.textViewSignup).setOnClickListener(this);
+            findViewById(R.id.button).setOnClickListener(this);
+        }
 
     }
 
@@ -58,9 +66,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                @Override
                public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                       Intent intent =   new Intent(getApplicationContext(),profile.class);
-                       startActivity(intent);
-                       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        finish();
+                        if(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()==null){
+                            Intent intent =   new Intent(getApplicationContext(),profile.class);
+                            startActivity(intent);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        }else{
+                            startActivity(new Intent(getApplicationContext(),home.class));
+                        }
+
+
                     }else{
                         Toast.makeText(getApplicationContext(),task.getException().getMessage().toString(),Toast.LENGTH_SHORT).show();
                         Log.d("login","login task not successfull");

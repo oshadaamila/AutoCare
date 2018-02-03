@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleInstance"
             android:theme="@style/autocare">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +21,7 @@
         </activity>
         <activity
             android:name=".signup"
+            android:launchMode="singleInstance"
             android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -36,7 +38,7 @@
             android:name=".profile"
             android:theme="@style/autocare">
             <intent-filter>
-            <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

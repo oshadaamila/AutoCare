@@ -59,11 +59,11 @@ public class profile extends AppCompatActivity implements View.OnClickListener{
                 Log.d("oshada","image view clicked");
                 break;
             case R.id.buttonContinue:
-                if(name.getText().equals(null)){
+                if(name.getText().toString().trim().length()==0){
                     name.setError("Enter a name to continue");
                     name.requestFocus();
                     break;
-                }else if(profImageUrl==null){
+                }else if(uriprofileimage==null){
                 Toast.makeText(getApplicationContext(), "Choose a image", Toast.LENGTH_LONG).show();
                 break;
                 }else {

@@ -7,4 +7,10 @@
     <string name="sign_up">Sign UP</string>
     <string name="do_not_have_an_account">Do not have an account?</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="title_activity_navigation_pane">navigationPane</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
