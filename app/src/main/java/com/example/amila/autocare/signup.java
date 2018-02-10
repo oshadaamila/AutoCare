@@ -13,19 +13,22 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class signup extends AppCompatActivity implements View.OnClickListener{
 
-    EditText editTextemail,editTextPassword,editTextReenterpassword;
+    EditText editTextemail,editTextPassword,editTextReenterpassword,editTextTelephone;
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
         editTextemail = findViewById(R.id.editTextemail);
         editTextPassword=findViewById(R.id.editTextPassword);
         editTextReenterpassword=findViewById(R.id.editTextReenterPassword);
+        editTextTelephone = findViewById(R.id.editTexttelephone);
         findViewById(R.id.textViewLogin).setOnClickListener(this);
         findViewById(R.id.buttonSignup).setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
@@ -81,7 +85,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
         }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             editTextemail.setError("Enter a valid editTextemail");
             editTextemail.requestFocus();
-        }else if(password.length()<8){
+        }else if(password.length()<8) {
             editTextPassword.setError("minimum length should be 8");
             editTextPassword.requestFocus();
         }else{
@@ -94,9 +98,10 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
                                 finish();
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(getApplicationContext(), "User Registered Successfully!!", Toast.LENGTH_LONG).show();
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent =   new Intent(getApplicationContext(),profile.class);
+                                //FirebaseUser user = mAuth.getCurrentUser();
+                                Intent intent =   new Intent(getApplicationContext(),phone_number_request.class);
                                 startActivity(intent);
+                                MainActivity.login.finish();
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 //updateUI(user);
                             } else {
@@ -118,7 +123,10 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
                         }
                     });
 
+
+
         }
 
-}
+    }
+
 }

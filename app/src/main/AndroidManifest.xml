@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     package="com.example.amila.autocare">
 
     <application
@@ -11,7 +12,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleInstance"
             android:theme="@style/autocare">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +37,12 @@
         <activity
             android:name=".profile"
             android:theme="@style/autocare">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".phone_number_request"
+                    android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
