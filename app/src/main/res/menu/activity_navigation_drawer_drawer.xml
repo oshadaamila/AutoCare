@@ -6,32 +6,36 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:icon="@drawable/ic_action_user"
+            android:title="Edit User Profile" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:icon="@drawable/ic_directions_car"
+            android:title="Edit Vehicles" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_attach_money"
+            android:title="Enter Expenses" />
+        <item
+            android:id="@+id/search_for_places"
+            android:icon="@drawable/ic_my_location"
+            android:title="Search For Places" />
+
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Settings" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Tasks">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/register_service_center"
+                android:title="Do you own a serice center?" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/logout"
+                android:title="Logout" />
+
         </menu>
     </item>
 

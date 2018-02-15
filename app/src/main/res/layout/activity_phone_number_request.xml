@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/autocare"
     tools:context="com.example.amila.autocare.phone_number_request">
 
     <EditText
@@ -38,7 +39,7 @@
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -64,7 +65,7 @@
         app:layout_constraintVertical_bias="0.027" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextVerificationCode"
         android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -87,7 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.651"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/editTextVerificationCode"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
@@ -100,6 +101,16 @@
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTexttelephone" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="386dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="8dp"
+        android:text="You might receive an SMS message for verification and standard rates will apply.  "
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTexttelephone" />
 
 </android.support.constraint.ConstraintLayout>
