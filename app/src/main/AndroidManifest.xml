@@ -51,7 +51,8 @@
         <activity
             android:name=".navigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".select_vehicle"></activity>
     </application>
 
 </manifest>

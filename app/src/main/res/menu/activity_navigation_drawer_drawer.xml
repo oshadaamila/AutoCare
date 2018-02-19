@@ -5,15 +5,15 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/edit_user_profile"
             android:icon="@drawable/ic_action_user"
             android:title="Edit User Profile" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/edit_vehicle"
             android:icon="@drawable/ic_directions_car"
             android:title="Edit Vehicles" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/enter_expenses"
             android:icon="@drawable/ic_attach_money"
             android:title="Enter Expenses" />
         <item
@@ -22,7 +22,7 @@
             android:title="Search For Places" />
 
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/settings"
             android:icon="@drawable/ic_menu_manage"
             android:title="Settings" />
     </group>

@@ -1,5 +1,7 @@
 package com.example.amila.autocare;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,7 +28,7 @@ public class navigationDrawer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -76,18 +78,14 @@ public class navigationDrawer extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.edit_vehicle) {
+            Intent intent =   new Intent(getApplicationContext(),select_vehicle.class);
+            startActivity(intent);
         } else if (id == R.id.logout) {
             FirebaseAuth.getInstance().signOut();
             finish();
             Intent intent =   new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
 
         }
 

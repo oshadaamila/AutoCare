@@ -19,8 +19,7 @@ public class home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+       /* mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.navList);
 
         // Set the adapter for the list view
@@ -28,7 +27,7 @@ public class home extends AppCompatActivity {
                 R.layout.drawer_list_item, mPlanetTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        btn = findViewById(R.id.button3);
+        btn = findViewById(R.id.button3);*/
         finish();
         startActivity(new Intent(getApplicationContext(),navigationDrawer.class));
 
