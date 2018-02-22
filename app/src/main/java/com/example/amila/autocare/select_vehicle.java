@@ -1,7 +1,9 @@
 package com.example.amila.autocare;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -22,14 +24,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class select_vehicle extends AppCompatActivity {
-    TextView tv_insurance_date,tv_model,tv_revenue_license_expiry,tv_reg_no;
+    TextView tv_insurance_date,tv_model,tv_revenue_license_expiry,tv_reg_no,tv_next_service;
     Spinner spinner_brand;
     private DatabaseReference mDatabase;
     FirebaseAuth mAuth;
+    long vehicle_count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,19 +57,21 @@ public class select_vehicle extends AppCompatActivity {
         tv_model= findViewById(R.id.editText_model);
         tv_reg_no = findViewById(R.id.editText_reg_no);
         tv_revenue_license_expiry =findViewById(R.id.revenue_license_expiry);
-
+        tv_next_service = findViewById(R.id.next_service);
         findViewById(R.id.button_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String brand,model,reg_no,insurance_expiry,revenue_license_expiry;
+                String brand,model,reg_no,insurance_expiry,revenue_license_expiry,next_service;
                 brand = spinner_brand.getSelectedItem().toString().trim();
                 model= tv_model.getText().toString().trim();
                 reg_no = tv_reg_no.getText().toString().trim();
                 insurance_expiry = tv_insurance_date.getText().toString().trim();
                 revenue_license_expiry=tv_revenue_license_expiry.getText().toString().trim();
-                Vehicle vehicle = new Vehicle(brand,model,reg_no,insurance_expiry,revenue_license_expiry);
+                next_service = tv_next_service.getText().toString().trim();
+                Vehicle vehicle = new Vehicle(brand,model,reg_no,insurance_expiry,revenue_license_expiry,next_service);
                 String userId = mUser.getUid();
-                mDatabase.child(userId).setValue(vehicle).addOnCompleteListener(new OnCompleteListener<Void>() {
+                setVehicleCount(mUser.getUid());
+                mDatabase.child(userId).child(Long.toString(vehicle_count+1)).setValue(vehicle).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
@@ -82,5 +91,26 @@ public class select_vehicle extends AppCompatActivity {
             }
         });
 
-}}
+    }
+
+
+
+    
+    public void setVehicleCount(String userID){
+        DatabaseReference users_vehicles=FirebaseDatabase.getInstance().getReference("Vehicles").
+                child(userID);
+        users_vehicles.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                vehicle_count = dataSnapshot.getChildrenCount();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+}
+
 
