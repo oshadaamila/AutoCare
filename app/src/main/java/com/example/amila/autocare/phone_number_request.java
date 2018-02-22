@@ -32,6 +32,7 @@ public class phone_number_request extends AppCompatActivity {
     PhoneAuthCredential credential;
     PhoneAuthProvider.ForceResendingToken mResendToken;
     FirebaseAuth mAuth;
+    boolean authenticated;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +75,7 @@ public class phone_number_request extends AppCompatActivity {
                 //     detect the incoming verification SMS and perform verification without
                 //     user action.
                 Log.d("phone AUTH", "onVerificationCompleted:" + credential);
+
 
                // signInWithPhoneAuthCredential(credential);
             }
@@ -124,6 +126,7 @@ public class phone_number_request extends AppCompatActivity {
                             Log.d("phone AUTH", "signInWithCredential:success");
 
                             FirebaseUser user = task.getResult().getUser();
+                            
                             // ...
                         } else {
                             // Sign in failed, display a message and update the UI

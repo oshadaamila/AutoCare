@@ -2,13 +2,13 @@ package com.example.amila.autocare;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -58,36 +58,66 @@ public class select_vehicle extends AppCompatActivity {
         tv_reg_no = findViewById(R.id.editText_reg_no);
         tv_revenue_license_expiry =findViewById(R.id.revenue_license_expiry);
         tv_next_service = findViewById(R.id.next_service);
+
         findViewById(R.id.button_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String brand,model,reg_no,insurance_expiry,revenue_license_expiry,next_service;
-                brand = spinner_brand.getSelectedItem().toString().trim();
-                model= tv_model.getText().toString().trim();
-                reg_no = tv_reg_no.getText().toString().trim();
-                insurance_expiry = tv_insurance_date.getText().toString().trim();
-                revenue_license_expiry=tv_revenue_license_expiry.getText().toString().trim();
-                next_service = tv_next_service.getText().toString().trim();
-                Vehicle vehicle = new Vehicle(brand,model,reg_no,insurance_expiry,revenue_license_expiry,next_service);
-                String userId = mUser.getUid();
-                setVehicleCount(mUser.getUid());
-                mDatabase.child(userId).child(Long.toString(vehicle_count+1)).setValue(vehicle).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            tv_reg_no.setText("");
-                            tv_model.setText("");
-                            tv_insurance_date.setText("");
-                            tv_revenue_license_expiry.setText("");
-                            Toast.makeText(getApplicationContext(),"Vehicle Added",Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Check Values",Toast.LENGTH_SHORT).show();
 
+                    brand = spinner_brand.getSelectedItem().toString().trim();
+                    model = tv_model.getText().toString().trim();
+                    reg_no = tv_reg_no.getText().toString().trim();
+                    insurance_expiry = tv_insurance_date.getText().toString().trim();
+                    revenue_license_expiry = tv_revenue_license_expiry.getText().toString().trim();
+                    next_service = tv_next_service.getText().toString().trim();
+                    Vehicle vehicle = new Vehicle(brand, model, reg_no, insurance_expiry, revenue_license_expiry, next_service);
+                    String userId = mUser.getUid();
+                    setVehicleCount(mUser.getUid());
+                if(model.isEmpty() || reg_no.isEmpty() || insurance_expiry.isEmpty() || revenue_license_expiry.isEmpty()||next_service.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Enter the values correctly!", Toast.LENGTH_LONG).show();
+                }else{
+                    mDatabase.child(userId).child(Long.toString(vehicle_count + 1)).setValue(vehicle).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                tv_reg_no.setText("");
+                                tv_model.setText("");
+                                tv_insurance_date.setText("");
+                                tv_revenue_license_expiry.setText("");
+                                tv_next_service.setText("");
+                                Toast.makeText(getApplicationContext(), "Vehicle Added", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Check Values", Toast.LENGTH_SHORT).show();
+
+                            }
                         }
-                    }
-                });
+                    });
+                 }
 
+            }
+        });
 
+        findViewById(R.id.insurance_date).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DatePickerFragment(R.id.insurance_date);
+                newFragment.show(getSupportFragmentManager(),"datePicker");
+            }
+        });
+
+        findViewById(R.id.next_service).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DatePickerFragment(R.id.next_service);
+                newFragment.show(getSupportFragmentManager(),"datePicker");
+            }
+        });
+
+        findViewById(R.id.revenue_license_expiry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DatePickerFragment(R.id.revenue_license_expiry);
+                newFragment.show(getSupportFragmentManager(),"datePicker");
             }
         });
 
@@ -95,7 +125,7 @@ public class select_vehicle extends AppCompatActivity {
 
 
 
-    
+
     public void setVehicleCount(String userID){
         DatabaseReference users_vehicles=FirebaseDatabase.getInstance().getReference("Vehicles").
                 child(userID);
@@ -104,7 +134,6 @@ public class select_vehicle extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 vehicle_count = dataSnapshot.getChildrenCount();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

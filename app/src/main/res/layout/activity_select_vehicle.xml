@@ -8,17 +8,6 @@
 
 
     <TextView
-        android:id="@+id/textView7"
-        android:layout_width="75dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="5636dp"
-        android:lineSpacingExtra="14sp"
-        android:text="Model"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText_model"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/textView8"
         android:layout_width="75dp"
         android:layout_height="34dp"
@@ -49,11 +38,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Model "
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/spinner_select_brand" />
 
@@ -70,16 +60,16 @@
     <EditText
         android:id="@+id/editText_reg_no"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginRight="60dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="Reg No"
         android:inputType="textPersonName"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_select_brand" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_model" />
 
     <TextView
         android:id="@+id/textView11"
@@ -164,5 +154,16 @@
         app:layout_constraintHorizontal_bias="0.73"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/revenue_license_expiry" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="75dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="36dp"
+        android:lineSpacingExtra="14sp"
+        android:text="Model"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editText_model"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
