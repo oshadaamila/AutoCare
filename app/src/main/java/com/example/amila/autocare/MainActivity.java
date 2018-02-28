@@ -1,5 +1,6 @@
 package com.example.amila.autocare;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +20,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     EditText editTextemail, editTextPassword;
     FirebaseAuth mAuth;
+    public static Activity login;
+
 
     public MainActivity() {
         mAuth = FirebaseAuth.getInstance();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
+        login=this;
         super.onCreate(savedInstanceState);
         if(mAuth.getCurrentUser()!=null){
             finish();
@@ -38,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+
 
 
     @Override

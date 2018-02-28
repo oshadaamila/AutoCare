@@ -86,6 +86,9 @@ public class profile extends AppCompatActivity implements View.OnClickListener{
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(),"User Profile Updated!",Toast.LENGTH_LONG).show();
+                            finish();
+                            Intent intent =   new Intent(getApplicationContext(),home.class);
+                            startActivity(intent);
                         }
                     }
                 });

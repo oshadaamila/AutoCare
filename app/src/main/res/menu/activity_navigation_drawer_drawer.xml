@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/edit_user_profile"
+            android:icon="@drawable/ic_action_user"
+            android:title="Edit User Profile" />
+        <item
+            android:id="@+id/edit_vehicle"
+            android:icon="@drawable/ic_directions_car"
+            android:title="Edit Vehicles" />
+        <item
+            android:id="@+id/enter_expenses"
+            android:icon="@drawable/ic_attach_money"
+            android:title="Enter Expenses" />
+        <item
+            android:id="@+id/search_for_places"
+            android:icon="@drawable/ic_my_location"
+            android:title="Search For Places" />
+
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Settings" />
+    </group>
+
+    <item android:title="Tasks">
+        <menu>
+            <item
+                android:id="@+id/register_service_center"
+                android:title="Do you own a serice center?" />
+            <item
+                android:id="@+id/logout"
+                android:title="Logout" />
+
+        </menu>
+    </item>
+
+</menu>
