@@ -28,18 +28,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     protected void onCreate(Bundle savedInstanceState) {
-        login=this;
+        /*login=this;
+
+        if(mAuth.getCurrentUser()!=null){*/
         super.onCreate(savedInstanceState);
-        if(mAuth.getCurrentUser()!=null){
             finish();
-            startActivity(new Intent(this,home.class));
-        }else {
+            startActivity(new Intent(this,navigationDrawer.class));
+        /*}else {
             setContentView(R.layout.activity_main);
             editTextemail = findViewById(R.id.email);
             editTextPassword = findViewById(R.id.password);
             findViewById(R.id.textViewSignup).setOnClickListener(this);
             findViewById(R.id.button).setOnClickListener(this);
-        }
+        }*/
 
     }
 
