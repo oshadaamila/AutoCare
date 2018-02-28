@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -126,13 +127,16 @@ public class phone_number_request extends AppCompatActivity {
                             Log.d("phone AUTH", "signInWithCredential:success");
 
                             FirebaseUser user = task.getResult().getUser();
-                            
+                            finish();
+                            Intent intent =   new Intent(getApplicationContext(),profile.class);
+                            startActivity(intent);
                             // ...
                         } else {
                             // Sign in failed, display a message and update the UI
                             Log.w("phone Auth", "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
+                                Toast.makeText(getApplicationContext(),"Code is invalid",Toast.LENGTH_LONG);
                             }
                         }
                     }
