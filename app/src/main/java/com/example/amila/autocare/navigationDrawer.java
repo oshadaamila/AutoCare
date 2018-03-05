@@ -1,12 +1,7 @@
 package com.example.amila.autocare;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -79,7 +74,7 @@ public class navigationDrawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.edit_vehicle) {
-            Intent intent =   new Intent(getApplicationContext(),select_vehicle.class);
+            Intent intent =   new Intent(getApplicationContext(),add_edit_vehicle.class);
             startActivity(intent);
         } else if (id == R.id.logout) {
             FirebaseAuth.getInstance().signOut();
