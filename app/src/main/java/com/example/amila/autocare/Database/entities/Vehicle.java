@@ -9,7 +9,7 @@ import android.widget.Spinner;
 /**
  * Created by amila on 2/21/18.
  */
-@Entity
+@Entity(tableName = "vehicle")
 public class Vehicle {
 
     //private String brand,model,reg_no,insurance_expiry_date,revenue_license_expiry_date,next_service_date;
