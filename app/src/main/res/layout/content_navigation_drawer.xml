@@ -8,4 +8,11 @@
     tools:context="com.example.amila.autocare.navigationDrawer"
     tools:showIn="@layout/app_bar_navigation_drawer">
 
+    <Button
+        android:id="@+id/show_vehicles_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show vehicles"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="41dp" />
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.amila.autocare;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,19 +9,30 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.amila.autocare.Database.AppDatabase;
+import com.example.amila.autocare.Database.entities.Vehicle;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
 
 public class navigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+        Button showVehicles;
+        AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        showVehicles = findViewById(R.id.show_vehicles_button);
+        database= AppDatabase.getAppDatabase(getApplicationContext());
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -33,6 +45,22 @@ public class navigationDrawer extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        showVehicles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<Vehicle> vehicles = database.vehicledao().getAll();
+                        for (Vehicle ve:vehicles){
+                            Log.d("vehicle",ve.getReg_no());
+                        }
+                    }
+                });
+
+            }
+        });
     }
 
     @Override
