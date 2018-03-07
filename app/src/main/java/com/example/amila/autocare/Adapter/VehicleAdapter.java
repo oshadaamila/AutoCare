@@ -41,7 +41,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.MyViewHo
         holder.reg_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopupMenu(holder.reg_no);
+                //showPopupMenu(holder.reg_no);
             }
         });
     }
