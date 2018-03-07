@@ -28,4 +28,6 @@
     <string name="title_activity_select_vehicle">select_vehicle</string>
     <string name="openDrawer" />
     <string name="closeDrawer" />
+    <string name="title_activity_search_for_places">Map</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
