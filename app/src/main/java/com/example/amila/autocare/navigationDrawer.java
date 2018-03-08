@@ -204,8 +204,8 @@ public class navigationDrawer extends AppCompatActivity
             startActivity(intent);
 
         }else if(id==R.id.search_for_places){
-            //Intent intent =   new Intent(getApplicationContext(),search_for_places.class);
-            //startActivity(intent);
+            Intent intent =   new Intent(getApplicationContext(),searchForPlaces.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
