@@ -16,10 +16,14 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.amila.autocare.search_for_places.GetNearbyPlacesData;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -37,7 +41,11 @@ import com.google.android.gms.location.LocationListener;
 
 import java.lang.reflect.Array;
 
-public class searchForPlaces extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,com.google.android.gms.location.LocationListener {
+public class searchForPlaces extends FragmentActivity implements
+        OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        com.google.android.gms.location.LocationListener
+        ,AdapterView.OnItemSelectedListener{
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -45,12 +53,14 @@ public class searchForPlaces extends FragmentActivity implements OnMapReadyCallb
     private Location mLastLocation;
     private  Marker mCurrLocationMarker;
     Spinner spinnerCateogary;
+    private LatLng mLatLng;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_for_places);
         spinnerCateogary = findViewById(R.id.spinnerCateogary);
+        spinnerCateogary.setOnItemSelectedListener(this);
         //set the spinner values
         setSpinnerValues();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -58,6 +68,7 @@ public class searchForPlaces extends FragmentActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         //check for internet connectivity and gps service before proceed
+        CheckGooglePlayServices();
         checkInternetConnectivity();
         checkGPS();
     }
@@ -83,8 +94,8 @@ public class searchForPlaces extends FragmentActivity implements OnMapReadyCallb
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        /*LatLng sydney = new LatLng(7, 80);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mLatLng = new LatLng(7, 80);
+        /*mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
@@ -157,6 +168,7 @@ public class searchForPlaces extends FragmentActivity implements OnMapReadyCallb
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        mLatLng = latLng;
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
@@ -220,6 +232,42 @@ public class searchForPlaces extends FragmentActivity implements OnMapReadyCallb
             builder.create().show();
         }
 
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(parent.getItemIdAtPosition(position)==0){
+            findCateogary("gas_station");
+        }else if(parent.getItemIdAtPosition(position)==1){
+            Log.d("spinnerTag",parent.getItemAtPosition(1).toString());
+            findCateogary("store");
+        }else if(parent.getItemIdAtPosition(position)==2){
+            Log.d("spinnerTag",parent.getItemAtPosition(2).toString());
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void findCateogary(String cateogary){
+        mMap.clear();
+        String url = getUrl(mLatLng.latitude, mLatLng.longitude, cateogary);
+        Object[] DataTransfer = new Object[2];
+        DataTransfer[0] = mMap;
+        DataTransfer[1] = url;
+        Log.d("onClick", url);
+        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+        getNearbyPlacesData.execute(DataTransfer);
+        Toast.makeText(getApplicationContext(),"Nearby "+ cateogary, Toast.LENGTH_LONG).show();
+
+    }
+
+    private String getUrl(double latitude, double longitude, String cateogary) {
+        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=2000&type="+cateogary+"&key=AIzaSyAGEmXKuOc06L38gc0btsc8m0XS09z1-NM";
+        return url;
     }
 
 }
