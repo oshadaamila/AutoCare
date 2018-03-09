@@ -12,6 +12,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.os.Process.THREAD_PRIORITY_BACKGROUND;
+
 /**
  * Created by pavilion 15 on 09-Mar-18.
  */
@@ -38,6 +40,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
         }
         return googlePlacesData;
     }
+
     //this method will execute after we receive the data from places API
     @Override
     protected void onPostExecute(String result) {

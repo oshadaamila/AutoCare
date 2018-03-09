@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -260,7 +261,9 @@ public class searchForPlaces extends FragmentActivity implements
         DataTransfer[1] = url;
         Log.d("onClick", url);
         GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-        getNearbyPlacesData.execute(DataTransfer);
+        //getNearbyPlacesData.execute(DataTransfer);
+        getNearbyPlacesData.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,DataTransfer);
+        //getNearbyPlacesData.execute(DataTransfer);
         Toast.makeText(getApplicationContext(),"Nearby "+ cateogary, Toast.LENGTH_LONG).show();
 
     }
