@@ -58,20 +58,25 @@ public class searchForPlaces extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_search_for_places);
-        spinnerCateogary = findViewById(R.id.spinnerCateogary);
-        spinnerCateogary.setOnItemSelectedListener(this);
-        //set the spinner values
-        setSpinnerValues();
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        //check for internet connectivity and gps service before proceed
-        CheckGooglePlayServices();
-        checkInternetConnectivity();
-        checkGPS();
+        if(checkInternetConnectivity()){
+            spinnerCateogary = findViewById(R.id.spinnerCateogary);
+            spinnerCateogary.setOnItemSelectedListener(this);
+            //set the spinner values
+            setSpinnerValues();
+            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+            //check for internet connectivity and gps service before proceed
+            CheckGooglePlayServices();
+
+            checkGPS();
+        }else{
+            checkInternetConnectivity();
+            //this.finish();
+        }
+
     }
     private void setSpinnerValues(){
         String [] cateogaries = {"Filling Stations","Spare Parts Stores","Service Centers"};
@@ -206,11 +211,12 @@ public class searchForPlaces extends FragmentActivity implements
             return;
         }
     }
-    public void checkInternetConnectivity(){
+    public boolean checkInternetConnectivity(){
         ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity.getActiveNetworkInfo() != null) {
             if (connectivity.getActiveNetworkInfo().isConnected()){
                 //do nothing since there is already a connection
+                return true;
             }
         }else{
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -228,11 +234,13 @@ public class searchForPlaces extends FragmentActivity implements
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //insert code to system response when user clicks dont enable
+                    
                 }
             });
             builder.create().show();
-        }
 
+        }
+        return false;
     }
 
 
