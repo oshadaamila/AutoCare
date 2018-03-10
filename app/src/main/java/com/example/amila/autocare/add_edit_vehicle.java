@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.List;
 
 public class add_edit_vehicle extends AppCompatActivity {
-    TextView tv_insurance_date,tv_model,tv_revenue_license_expiry,tv_reg_no,tv_next_service;
+    TextView tv_insurance_date,tv_model,tv_revenue_license_expiry,tv_reg_no,tv_next_service,tv_name,tv_mileage;
     Spinner spinner_brand;
     AppDatabase appDatabase;
 
@@ -51,11 +51,14 @@ public class add_edit_vehicle extends AppCompatActivity {
         tv_reg_no = findViewById(R.id.editText_reg_no);
         tv_revenue_license_expiry =findViewById(R.id.revenue_license_expiry);
         tv_next_service = findViewById(R.id.next_service);
+        tv_name=findViewById(R.id.editTextName);
+        tv_mileage = findViewById(R.id.editTextMileage);
+
 
         findViewById(R.id.button_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String brand,model,reg_no,insurance_expiry,revenue_license_expiry,next_service;
+                String brand,model,reg_no,insurance_expiry,revenue_license_expiry,next_service,name,mileage;
 
                     brand = spinner_brand.getSelectedItem().toString().trim();
                     model = tv_model.getText().toString().trim();
@@ -63,9 +66,13 @@ public class add_edit_vehicle extends AppCompatActivity {
                     insurance_expiry = tv_insurance_date.getText().toString().trim();
                     revenue_license_expiry = tv_revenue_license_expiry.getText().toString().trim();
                     next_service = tv_next_service.getText().toString().trim();
-                    final Vehicle vehicle = new Vehicle(brand, model, reg_no, insurance_expiry, revenue_license_expiry, next_service);
+                    name=tv_name.getText().toString().trim();
+                    mileage=tv_mileage.getText().toString().trim();
 
-                if(model.isEmpty() || reg_no.isEmpty() || insurance_expiry.isEmpty() || revenue_license_expiry.isEmpty()||next_service.isEmpty()) {
+                    final Vehicle vehicle = new Vehicle(brand, model, reg_no, insurance_expiry, revenue_license_expiry, next_service,name,mileage);
+
+                if(model.isEmpty() || reg_no.isEmpty() || insurance_expiry.isEmpty() ||
+                        revenue_license_expiry.isEmpty()||next_service.isEmpty()|| name.isEmpty()||mileage.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Enter the values correctly!", Toast.LENGTH_LONG).show();
                 }else{
 

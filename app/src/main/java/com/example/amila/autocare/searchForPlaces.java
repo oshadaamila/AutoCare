@@ -234,7 +234,7 @@ public class searchForPlaces extends FragmentActivity implements
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //insert code to system response when user clicks dont enable
-                    
+
                 }
             });
             builder.create().show();

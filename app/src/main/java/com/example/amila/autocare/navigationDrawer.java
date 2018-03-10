@@ -65,7 +65,12 @@ public class navigationDrawer extends AppCompatActivity
                 vehicleList = database.vehicledao().getAll();
                 Log.d("async","this code executed");
                 if(vehicleList.size()==0){
-                    Toast.makeText(getApplicationContext(),"Add a vehicle first",Toast.LENGTH_LONG).show();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),"Add a vehicle first",Toast.LENGTH_LONG).show();
+                        }
+                    });
 
                 }else {
                     vehicleAdapter = new VehicleAdapter(getApplicationContext(), vehicleList);
