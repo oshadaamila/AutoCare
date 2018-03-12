@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.amila.autocare.Carquery.getBrands;
 import com.example.amila.autocare.Database.AppDatabase;
 import com.example.amila.autocare.Database.dao.VehicleDAO;
 import com.example.amila.autocare.Database.entities.Vehicle;
@@ -29,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class add_edit_vehicle extends AppCompatActivity {
@@ -43,6 +45,14 @@ public class add_edit_vehicle extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spinner_select_brand);
         appDatabase = AppDatabase.getAppDatabase(getApplicationContext());
 
+
+
+       /* ArrayList<String> modellist = new ArrayList<String>();
+        Object[] DataTransfer = new Object[2];
+        DataTransfer[0] =modellist;
+        DataTransfer[1]=findViewById(R.id.textViewModel);
+        getBrands getbrands = new getBrands(getApplicationContext(),add_edit_vehicle.this);
+        getbrands.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,DataTransfer);*/
 
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
