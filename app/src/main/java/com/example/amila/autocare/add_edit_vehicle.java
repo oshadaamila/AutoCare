@@ -1,50 +1,43 @@
 package com.example.amila.autocare;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.os.SystemClock;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.amila.autocare.Carquery.getBrands;
 import com.example.amila.autocare.Database.AppDatabase;
-import com.example.amila.autocare.Database.dao.VehicleDAO;
 import com.example.amila.autocare.Database.entities.Vehicle;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.amila.autocare.Reminders.ScheduleClient;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class add_edit_vehicle extends AppCompatActivity {
     TextView tv_insurance_date,tv_model,tv_revenue_license_expiry,tv_reg_no,tv_next_service,tv_name,tv_mileage;
     Spinner spinner_brand;
     AppDatabase appDatabase;
+    ScheduleClient scheduleClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            Calendar cc = dateStringConverter("2011/1/2");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_vehicle);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_select_brand);
+        Spinner spinner = findViewById(R.id.spinner_select_brand);
         appDatabase = AppDatabase.getAppDatabase(getApplicationContext());
-
+        scheduleClient = new ScheduleClient(getApplicationContext());
+        scheduleClient.doBindService();
 
 
        /* ArrayList<String> modellist = new ArrayList<String>();
@@ -139,8 +132,16 @@ public class add_edit_vehicle extends AppCompatActivity {
             }
         });
 
+
     }
-    
+
+    private Calendar dateStringConverter(String date) throws ParseException {
+        Calendar c = Calendar.getInstance();
+        String pattern = "y/M/d";
+        Date date1 = new SimpleDateFormat(pattern).parse(date);
+        c.setTime(date1);
+        return c;
+    }
 }
 
 
