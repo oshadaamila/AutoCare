@@ -30,6 +30,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <service android:name="com.example.amila.autocare.Reminders.NotifyService" />
+        <service android:name="com.example.amila.autocare.Reminders.ScheduleService" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/autocare">
@@ -85,6 +87,7 @@
             android:name=".searchForPlaces"
             android:label="@string/title_activity_search_for_places" />
         <activity android:name=".Reminders.ReminderActivity"></activity>
+
     </application>
 
 </manifest>

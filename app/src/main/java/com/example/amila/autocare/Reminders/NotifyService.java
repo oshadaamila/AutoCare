@@ -12,6 +12,8 @@ import android.util.Log;
 
 import com.example.amila.autocare.R;
 
+import java.util.Random;
+
 /**
  * Created by pavilion 15 on 12-Mar-18.
  */
@@ -78,9 +80,9 @@ public class NotifyService extends Service {
 
         // Clear the notification when it is pressed
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
-
+        Random rand = new Random();
         // Send the notification to the system.
-        mNM.notify(NOTIFICATION, notification);
+        mNM.notify(rand.nextInt(10000), notification);
 
         // Stop the service when we are finished
         stopSelf();

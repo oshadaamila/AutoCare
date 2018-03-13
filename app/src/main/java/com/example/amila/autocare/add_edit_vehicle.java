@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -14,7 +15,6 @@ import com.example.amila.autocare.Database.AppDatabase;
 import com.example.amila.autocare.Database.entities.Vehicle;
 import com.example.amila.autocare.Reminders.ScheduleClient;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,22 +23,21 @@ public class add_edit_vehicle extends AppCompatActivity {
     TextView tv_insurance_date,tv_model,tv_revenue_license_expiry,tv_reg_no,tv_next_service,tv_name,tv_mileage;
     Spinner spinner_brand;
     AppDatabase appDatabase;
-    ScheduleClient scheduleClient;
+    ScheduleClient scheduleclient1, scheduleclient2, scheduleclient3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try {
-            Calendar cc = dateStringConverter("2011/1/2");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_vehicle);
         Spinner spinner = findViewById(R.id.spinner_select_brand);
         appDatabase = AppDatabase.getAppDatabase(getApplicationContext());
-        scheduleClient = new ScheduleClient(getApplicationContext());
-        scheduleClient.doBindService();
-
+        scheduleclient1 = new ScheduleClient(this);
+        scheduleclient1.doBindService();
+        scheduleclient2 = new ScheduleClient(this);
+        scheduleclient2.doBindService();
+        scheduleclient3 = new ScheduleClient(this);
+        scheduleclient3.doBindService();
 
        /* ArrayList<String> modellist = new ArrayList<String>();
         Object[] DataTransfer = new Object[2];
@@ -67,7 +66,7 @@ public class add_edit_vehicle extends AppCompatActivity {
         findViewById(R.id.button_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String brand,model,reg_no,insurance_expiry,revenue_license_expiry,next_service,name,mileage;
+                final String brand, model, reg_no, insurance_expiry, revenue_license_expiry, next_service, name, mileage;
 
                     brand = spinner_brand.getSelectedItem().toString().trim();
                     model = tv_model.getText().toString().trim();
@@ -84,12 +83,16 @@ public class add_edit_vehicle extends AppCompatActivity {
                         revenue_license_expiry.isEmpty()||next_service.isEmpty()|| name.isEmpty()||mileage.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Enter the values correctly!", Toast.LENGTH_LONG).show();
                 }else{
+                    scheduleclient1.setAlarmForNotification(dateStringConverter(insurance_expiry), "Insurance Expiry!!!!!!!!!");
+                    scheduleclient2.setAlarmForNotification(dateStringConverter(revenue_license_expiry), "Revenue License Expiry");
+                    scheduleclient3.setAlarmForNotification(dateStringConverter(next_service), "Service Reminder");
 
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 appDatabase.vehicledao().insertAll(vehicle);
+
                             }catch (Exception e){
                                 final String error= e.getMessage();
                                 runOnUiThread(new Runnable() {
@@ -135,12 +138,31 @@ public class add_edit_vehicle extends AppCompatActivity {
 
     }
 
-    private Calendar dateStringConverter(String date) throws ParseException {
+    private Calendar dateStringConverter(String date) {
         Calendar c = Calendar.getInstance();
         String pattern = "y/M/d";
-        Date date1 = new SimpleDateFormat(pattern).parse(date);
+        Date date1 = null;
+        try {
+            date1 = new SimpleDateFormat(pattern).parse(date);
+        } catch (Exception e) {
+            Log.d("parseError", e.getMessage());
+        }
         c.setTime(date1);
         return c;
+    }
+
+    @Override
+    protected void onStop() {
+        // When our activity is stopped ensure we also stop the connection to the service
+        // this stops us leaking our activity into the system *bad*
+        if (scheduleclient1 != null) {
+            scheduleclient1.doUnbindService();
+        } else if (scheduleclient2 != null) {
+            scheduleclient2.doUnbindService();
+        } else if (scheduleclient3 != null) {
+            scheduleclient3.doUnbindService();
+        }
+        super.onStop();
     }
 }
 
