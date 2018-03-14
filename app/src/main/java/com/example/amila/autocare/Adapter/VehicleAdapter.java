@@ -25,6 +25,11 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.MyViewHo
     private Context mcontext;
     private List<Vehicle> vehicleList;
 
+    public VehicleAdapter(Context mContext, List<Vehicle> vehicleList) {
+        this.mcontext = mContext;
+        this.vehicleList = vehicleList;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.vehicle_card,parent,
@@ -34,14 +39,14 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Vehicle vehicle = vehicleList.get(position);
+        final Vehicle vehicle = vehicleList.get(position);
         holder.reg_no.setText(vehicle.getReg_no());
         holder.brand.setText(vehicle.getBrand());
         holder.model.setText(vehicle.getModel());
-        holder.reg_no.setOnClickListener(new View.OnClickListener() {
+        holder.viewFullDetails.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //showPopupMenu(holder.reg_no);
+            public void onClick(View v) {
+                Toast.makeText(mcontext, "Selected Vehicle is" + vehicle.getReg_no(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -53,6 +58,11 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.MyViewHo
         inflater.inflate(R.menu.menu_vehicle, popup.getMenu());
         popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
         popup.show();
+    }
+
+    @Override
+    public int getItemCount() {
+        return vehicleList.size();
     }
 
     class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
@@ -74,23 +84,16 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.MyViewHo
             return false;
         }
     }
-    @Override
-    public int getItemCount() {
-        return vehicleList.size();
-    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView reg_no,brand,model;
+        public TextView reg_no, brand, model, viewFullDetails;
         public MyViewHolder(View view){
             super(view);
             reg_no= view.findViewById(R.id.Reg_no);
             brand = view.findViewById(R.id.Brand);
             model = view.findViewById(R.id.model);
+            viewFullDetails = view.findViewById(R.id.viewFullDetail);
         }
-    }
-    public VehicleAdapter(Context mContext, List<Vehicle> vehicleList){
-        this.mcontext = mContext;
-        this.vehicleList = vehicleList;
     }
 
 }

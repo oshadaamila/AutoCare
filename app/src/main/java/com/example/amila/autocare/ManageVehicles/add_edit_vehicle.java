@@ -1,4 +1,4 @@
-package com.example.amila.autocare;
+package com.example.amila.autocare.ManageVehicles;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.amila.autocare.Database.AppDatabase;
 import com.example.amila.autocare.Database.entities.Vehicle;
+import com.example.amila.autocare.DatePickerFragment;
+import com.example.amila.autocare.R;
 import com.example.amila.autocare.Reminders.ScheduleClient;
 
 import java.text.SimpleDateFormat;

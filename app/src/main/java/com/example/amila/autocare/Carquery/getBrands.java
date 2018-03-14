@@ -3,13 +3,9 @@ package com.example.amila.autocare.Carquery;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.amila.autocare.add_edit_vehicle;
 
 import org.json.JSONArray;
 import org.json.JSONException;

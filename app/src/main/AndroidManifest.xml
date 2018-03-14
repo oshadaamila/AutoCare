@@ -30,8 +30,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name="com.example.amila.autocare.Reminders.NotifyService" />
-        <service android:name="com.example.amila.autocare.Reminders.ScheduleService" />
+        <service android:name=".Reminders.NotifyService" />
+        <service android:name=".Reminders.ScheduleService" />
+
         <activity
             android:name=".MainActivity"
             android:theme="@style/autocare">
@@ -78,7 +79,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".add_edit_vehicle">
+        <activity android:name=".ManageVehicles.add_edit_vehicle">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -86,8 +87,9 @@
         <activity
             android:name=".searchForPlaces"
             android:label="@string/title_activity_search_for_places" />
-        <activity android:name=".Reminders.ReminderActivity"></activity>
-
+        <activity android:name=".Reminders.ReminderActivity" />
+        <activity android:name=".Expenses.add_expense" />
+        <activity android:name=".ManageVehicles.ViewVehicle"></activity>
     </application>
 
 </manifest>
