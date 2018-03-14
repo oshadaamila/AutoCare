@@ -57,7 +57,7 @@ public class add_edit_vehicle extends AppCompatActivity {
         spinner.setAdapter(adapter);
         tv_insurance_date = findViewById(R.id.insurance_date);
         spinner_brand=findViewById(R.id.spinner_select_brand);
-        tv_model= findViewById(R.id.editText_model);
+        tv_model = findViewById(R.id.editText_modelView);
         tv_reg_no = findViewById(R.id.editText_reg_no);
         tv_revenue_license_expiry =findViewById(R.id.revenue_license_expiry);
         tv_next_service = findViewById(R.id.next_service);

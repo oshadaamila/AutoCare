@@ -19,4 +19,7 @@ public interface VehicleDAO {
 
     @Insert
     void insertAll(Vehicle...vehicles);
+
+    @Query("SELECT * FROM Vehicle WHERE reg_no=:Reg_NO")
+    Vehicle selectOne(String Reg_NO);
 }

@@ -1,6 +1,7 @@
 package com.example.amila.autocare.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amila.autocare.Database.entities.Vehicle;
+import com.example.amila.autocare.ManageVehicles.ViewVehicle;
 import com.example.amila.autocare.R;
 
 import java.util.List;
@@ -46,7 +48,10 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.MyViewHo
         holder.viewFullDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mcontext, "Selected Vehicle is" + vehicle.getReg_no(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(mcontext, ViewVehicle.class);
+                intent.putExtra("Reg_No", vehicle.getReg_no());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mcontext.startActivity(intent);
             }
         });
     }
