@@ -10,11 +10,10 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.provider.Settings;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -38,9 +37,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.location.LocationListener;
-
-import java.lang.reflect.Array;
 
 public class searchForPlaces extends FragmentActivity implements
         OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
@@ -48,12 +44,12 @@ public class searchForPlaces extends FragmentActivity implements
         com.google.android.gms.location.LocationListener
         ,AdapterView.OnItemSelectedListener{
 
+    Spinner spinnerCateogary;
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private  LocationRequest mLocationRequest;
     private Location mLastLocation;
     private  Marker mCurrLocationMarker;
-    Spinner spinnerCateogary;
     private LatLng mLatLng;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +146,7 @@ public class searchForPlaces extends FragmentActivity implements
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (LocationListener) this);
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
     }
 
@@ -187,7 +183,7 @@ public class searchForPlaces extends FragmentActivity implements
 
         //stop location updates
         if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,(LocationListener) this);
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
     }
     public void checkGPS(){
@@ -276,7 +272,7 @@ public class searchForPlaces extends FragmentActivity implements
 
     }
 
-    private String getUrl(double latitude, double longitude, String cateogary) {
+    public String getUrl(double latitude, double longitude, String cateogary) {
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=2000&type="+cateogary+"&key=AIzaSyAGEmXKuOc06L38gc0btsc8m0XS09z1-NM";
         return url;
     }
