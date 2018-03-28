@@ -1,5 +1,7 @@
 package com.example.amila.autocare.ManageVehicles;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,50 +35,9 @@ public class ViewVehicle extends AppCompatActivity {
         tv_name2 = findViewById(R.id.textView_name);
         tv_mileage = findViewById(R.id.textView_mileage);
         tv_brand = findViewById(R.id.textView_brand);
-        tv_brand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "brand", Toast.LENGTH_LONG).show();
-            }
-        });
-        tv_model.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "model", Toast.LENGTH_LONG).show();
-            }
-        });
-        tv_name2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "name", Toast.LENGTH_LONG).show();
-            }
-        });
-        tv_reg_no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "reg_no", Toast.LENGTH_LONG).show();
-            }
-        });
-        tv_insurance_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "insurance date", Toast.LENGTH_LONG).show();
-            }
-        });
-        tv_revenue_license_expiry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "revenue_license", Toast.LENGTH_LONG).show();
-            }
-        });
-        tv_next_service.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "next_service", Toast.LENGTH_LONG).show();
-            }
-        });
-
         vehicle = getVehicle(reg_no);
+
+
     }
 
     private Vehicle getVehicle(final String reg_no) {
@@ -86,6 +47,49 @@ public class ViewVehicle extends AppCompatActivity {
             public void run() {
                 vehicle[0] = appDatabase.vehicledao().selectOne(reg_no);
                 setValues(vehicle[0]);
+                tv_brand.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openDialog(vehicle[0].getReg_no(), "brand", vehicle[0].getBrand());
+                        Toast.makeText(getApplicationContext(), "brand", Toast.LENGTH_LONG).show();
+                    }
+                });
+                tv_model.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "model", Toast.LENGTH_LONG).show();
+                    }
+                });
+                tv_name2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "name", Toast.LENGTH_LONG).show();
+                    }
+                });
+                tv_reg_no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "reg_no", Toast.LENGTH_LONG).show();
+                    }
+                });
+                tv_insurance_date.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "insurance date", Toast.LENGTH_LONG).show();
+                    }
+                });
+                tv_revenue_license_expiry.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "revenue_license", Toast.LENGTH_LONG).show();
+                    }
+                });
+                tv_next_service.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "next_service", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
         return vehicle[0];
@@ -93,7 +97,7 @@ public class ViewVehicle extends AppCompatActivity {
 
 
     private void setValues(Vehicle vehicle) {
-       
+
         tv_name2.setText(vehicle.getName());
         tv_brand.setText(vehicle.getBrand());
         tv_model.setText(vehicle.getModel());
@@ -102,6 +106,24 @@ public class ViewVehicle extends AppCompatActivity {
         tv_next_service.setText(vehicle.getNext_service_date());
         tv_mileage.setText(vehicle.getMileage());
         tv_reg_no.setText(vehicle.getReg_no());
+    }
+
+    private void openDialog(String reg_no, String field, String value) {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        // Create and show the dialog.
+        EditDialog newFragment = new EditDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString("reg_no", reg_no);
+        bundle.putString("field", field);
+        bundle.putString("value", value);
+        newFragment.setArguments(bundle);
+        newFragment.show(ft, "dialog");
     }
 
 

@@ -2,9 +2,9 @@ package com.example.amila.autocare;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -18,9 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
 
+    public static Activity login;
     EditText editTextemail, editTextPassword;
     FirebaseAuth mAuth;
-    public static Activity login;
 
 
     public MainActivity() {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.textViewSignup:
                 startActivity(new Intent(this,signup.class));
                 break;
-            case R.id.button:
+            case R.id.button_update:
                 userlogin();
                 break;
         }
