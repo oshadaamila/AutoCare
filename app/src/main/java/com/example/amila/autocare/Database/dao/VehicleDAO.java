@@ -22,4 +22,19 @@ public interface VehicleDAO {
 
     @Query("SELECT * FROM Vehicle WHERE reg_no=:Reg_NO")
     Vehicle selectOne(String Reg_NO);
+
+    @Query("UPDATE Vehicle SET brand = :value WHERE reg_no=:Reg_NO")
+    void updateBrand(String value, String Reg_NO);
+
+    @Query("UPDATE Vehicle SET name = :value WHERE reg_no=:Reg_NO")
+    void updateName(String value, String Reg_NO);
+
+    @Query("UPDATE Vehicle SET model = :value WHERE reg_no=:Reg_NO")
+    void updateModel(String value, String Reg_NO);
+
+    @Query("UPDATE Vehicle SET reg_no = :value WHERE reg_no=:Reg_NO")
+    void updateRegNO(String value, String Reg_NO);
+
+    @Query("UPDATE Vehicle SET mileage = :value WHERE reg_no=:Reg_NO")
+    void updateMileage(String value, String Reg_NO);
 }

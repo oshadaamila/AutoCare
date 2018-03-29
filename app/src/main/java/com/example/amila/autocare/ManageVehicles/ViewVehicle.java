@@ -40,7 +40,7 @@ public class ViewVehicle extends AppCompatActivity {
 
     }
 
-    private Vehicle getVehicle(final String reg_no) {
+    public Vehicle getVehicle(final String reg_no) {
         final Vehicle[] vehicle = new Vehicle[1];
         AsyncTask.execute(new Runnable() {
             @Override
@@ -51,25 +51,24 @@ public class ViewVehicle extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         openDialog(vehicle[0].getReg_no(), "brand", vehicle[0].getBrand());
-                        Toast.makeText(getApplicationContext(), "brand", Toast.LENGTH_LONG).show();
                     }
                 });
                 tv_model.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "model", Toast.LENGTH_LONG).show();
+                        openDialog(vehicle[0].getReg_no(), "model", vehicle[0].getModel());
                     }
                 });
                 tv_name2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "name", Toast.LENGTH_LONG).show();
+                        openDialog(vehicle[0].getReg_no(), "name", vehicle[0].getName());
                     }
                 });
                 tv_reg_no.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "reg_no", Toast.LENGTH_LONG).show();
+                        openDialog(vehicle[0].getReg_no(), "reg_no", vehicle[0].getReg_no());
                     }
                 });
                 tv_insurance_date.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +89,12 @@ public class ViewVehicle extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "next_service", Toast.LENGTH_LONG).show();
                     }
                 });
+                tv_mileage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openDialog(vehicle[0].getReg_no(), "mileage", vehicle[0].getMileage());
+                    }
+                });
             }
         });
         return vehicle[0];
@@ -97,7 +102,6 @@ public class ViewVehicle extends AppCompatActivity {
 
 
     private void setValues(Vehicle vehicle) {
-
         tv_name2.setText(vehicle.getName());
         tv_brand.setText(vehicle.getBrand());
         tv_model.setText(vehicle.getModel());
