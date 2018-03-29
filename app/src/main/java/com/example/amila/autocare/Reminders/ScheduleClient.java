@@ -38,6 +38,7 @@ public class ScheduleClient {
     };
 
     public ScheduleClient(Context context) {
+
         mContext = context;
     }
 

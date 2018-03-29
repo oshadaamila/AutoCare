@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.amila.autocare.Database.AppDatabase;
 import com.example.amila.autocare.Database.entities.Vehicle;
@@ -74,19 +73,22 @@ public class ViewVehicle extends AppCompatActivity {
                 tv_insurance_date.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "insurance date", Toast.LENGTH_LONG).show();
+                        UpdateDateDialog updateDateDialog = new UpdateDateDialog(vehicle[0].getReg_no(), "insurance");
+                        updateDateDialog.show(getSupportFragmentManager(), "datePicker");
                     }
                 });
                 tv_revenue_license_expiry.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "revenue_license", Toast.LENGTH_LONG).show();
+                        UpdateDateDialog updateDateDialog = new UpdateDateDialog(vehicle[0].getReg_no(), "revenue_license");
+                        updateDateDialog.show(getSupportFragmentManager(), "datePicker");
                     }
                 });
                 tv_next_service.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "next_service", Toast.LENGTH_LONG).show();
+                        UpdateDateDialog updateDateDialog = new UpdateDateDialog(vehicle[0].getReg_no(), "next_service");
+                        updateDateDialog.show(getSupportFragmentManager(), "datePicker");
                     }
                 });
                 tv_mileage.setOnClickListener(new View.OnClickListener() {

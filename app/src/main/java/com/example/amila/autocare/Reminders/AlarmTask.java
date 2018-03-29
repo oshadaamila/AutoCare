@@ -38,7 +38,7 @@ public class AlarmTask implements Runnable {
         intent.setAction("uniqueCode");
         intent.putExtra(NotifyService.INTENT_NOTIFY, true);
         intent.putExtra("Message", msg);
-        PendingIntent pendingIntent = PendingIntent.getService(context, request_code, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getService(context, request_code, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         // Sets an alarm - note this alarm will be lost if the phone is turned off and on again
         am.set(AlarmManager.RTC_WAKEUP, date.getTimeInMillis(), pendingIntent);
