@@ -20,12 +20,14 @@ public class AlarmTask implements Runnable {
     // Your context to retrieve the alarm manager from
     private final Context context;
 
-    private final String msg;
-    public AlarmTask(Context context, Calendar date, String msg) {
+    private final String msg, requestCode;
+
+    public AlarmTask(Context context, Calendar date, String msg, String requestCode) {
         this.context = context;
         this.am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         this.date = date;
         this.msg = msg;
+        this.requestCode = requestCode;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class AlarmTask implements Runnable {
         // Request to start are service when the alarm date is upon us
         // We don't start an activity as we just want to pop up a notification into the system bar not a full activity
         Random rand = new Random();
-        Integer request_code = rand.nextInt(100000);
+        Integer request_code = Integer.parseInt(requestCode);
         Intent intent = new Intent(context, NotifyService.class);
         intent.setAction("uniqueCode");
         intent.putExtra(NotifyService.INTENT_NOTIFY, true);

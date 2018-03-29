@@ -32,7 +32,7 @@ public class EditDialog extends DialogFragment {
         super.onCreate(savedInstanceState);
         appDatabase = AppDatabase.getAppDatabase(getActivity());
     }
-
+    // TODO: 29-Mar-18 open correctly formatted dialog for reg_no
 
     @Nullable
     @Override

@@ -73,22 +73,28 @@ public class ViewVehicle extends AppCompatActivity {
                 tv_insurance_date.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        UpdateDateDialog updateDateDialog = new UpdateDateDialog(vehicle[0].getReg_no(), "insurance");
-                        updateDateDialog.show(getSupportFragmentManager(), "datePicker");
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                        if (prev != null) {
+                            ft.remove(prev);
+                        }
+                        ft.addToBackStack(null);
+                        UpdateDateDialog updateDateDialog = new UpdateDateDialog(vehicle[0].getReg_no_number(), "insurance");
+                        updateDateDialog.show(ft, "datePicker");
                     }
                 });
                 tv_revenue_license_expiry.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        UpdateDateDialog updateDateDialog = new UpdateDateDialog(vehicle[0].getReg_no(), "revenue_license");
-                        updateDateDialog.show(getSupportFragmentManager(), "datePicker");
+                        UpdateDateDialog updateDateDialog = new UpdateDateDialog(vehicle[0].getReg_no_number(), "revenue_license");
+                        //updateDateDialog.show(getSupportFragmentManager(), "datePicker");
                     }
                 });
                 tv_next_service.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         UpdateDateDialog updateDateDialog = new UpdateDateDialog(vehicle[0].getReg_no(), "next_service");
-                        updateDateDialog.show(getSupportFragmentManager(), "datePicker");
+                        //updateDateDialog.show(getSupportFragmentManager(), "datePicker");
                     }
                 });
                 tv_mileage.setOnClickListener(new View.OnClickListener() {

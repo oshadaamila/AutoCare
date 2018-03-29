@@ -22,9 +22,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class add_edit_vehicle extends AppCompatActivity {
-    TextView tv_insurance_date,tv_model,tv_revenue_license_expiry,tv_reg_no,tv_next_service,tv_name,tv_mileage;
+    TextView tv_insurance_date, tv_model, tv_revenue_license_expiry, tv_reg_no_letters, tv_reg_no_number, tv_next_service, tv_name, tv_mileage;
     Spinner spinner_brand;
     AppDatabase appDatabase;
+    String requestCode;
     ScheduleClient scheduleclient1, scheduleclient2, scheduleclient3;
 
     @Override
@@ -58,7 +59,8 @@ public class add_edit_vehicle extends AppCompatActivity {
         tv_insurance_date = findViewById(R.id.insurance_date);
         spinner_brand=findViewById(R.id.spinner_select_brand);
         tv_model = findViewById(R.id.editText_model);
-        tv_reg_no = findViewById(R.id.editText_reg_no);
+        tv_reg_no_letters = findViewById(R.id.editText_reg_no_letters);
+        tv_reg_no_number = findViewById(R.id.editText_reg_no_number);
         tv_revenue_license_expiry =findViewById(R.id.revenue_license_expiry);
         tv_next_service = findViewById(R.id.next_service);
         tv_name=findViewById(R.id.editTextName);
@@ -68,26 +70,28 @@ public class add_edit_vehicle extends AppCompatActivity {
         findViewById(R.id.button_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String brand, model, reg_no, insurance_expiry, revenue_license_expiry, next_service, name, mileage;
+                final String brand, model, reg_no, reg_no_number, insurance_expiry, revenue_license_expiry, next_service, name, mileage;
 
                     brand = spinner_brand.getSelectedItem().toString().trim();
                     model = tv_model.getText().toString().trim();
-                    reg_no = tv_reg_no.getText().toString().trim();
+                reg_no = tv_reg_no_letters.getText().toString().trim() + tv_reg_no_number.getText().toString().trim();
+                reg_no_number = tv_reg_no_number.getText().toString().trim();
+                requestCode = tv_reg_no_number.getText().toString().trim();
                     insurance_expiry = tv_insurance_date.getText().toString().trim();
                     revenue_license_expiry = tv_revenue_license_expiry.getText().toString().trim();
                     next_service = tv_next_service.getText().toString().trim();
                     name=tv_name.getText().toString().trim();
                     mileage=tv_mileage.getText().toString().trim();
 
-                    final Vehicle vehicle = new Vehicle(brand, model, reg_no, insurance_expiry, revenue_license_expiry, next_service,name,mileage);
+                final Vehicle vehicle = new Vehicle(brand, model, reg_no, reg_no_number, insurance_expiry, revenue_license_expiry, next_service, name, mileage);
 
                 if(model.isEmpty() || reg_no.isEmpty() || insurance_expiry.isEmpty() ||
                         revenue_license_expiry.isEmpty()||next_service.isEmpty()|| name.isEmpty()||mileage.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Enter the values correctly!", Toast.LENGTH_LONG).show();
                 }else{
-                    scheduleclient1.setAlarmForNotification(dateStringConverter(insurance_expiry), "Insurance Expiry!!!!!!!!!");
-                    scheduleclient2.setAlarmForNotification(dateStringConverter(revenue_license_expiry), "Revenue License Expiry");
-                    scheduleclient3.setAlarmForNotification(dateStringConverter(next_service), "Service Reminder");
+                    scheduleclient1.setAlarmForNotification(dateStringConverter(insurance_expiry), "Insurance Expiry!!!!!!!!!", requestCode + "1");
+                    scheduleclient2.setAlarmForNotification(dateStringConverter(revenue_license_expiry), "Revenue License Expiry", requestCode + "2");
+                    scheduleclient3.setAlarmForNotification(dateStringConverter(next_service), "Service Reminder", requestCode + "3");
 
                     AsyncTask.execute(new Runnable() {
                         @Override

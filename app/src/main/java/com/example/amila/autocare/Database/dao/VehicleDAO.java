@@ -37,4 +37,7 @@ public interface VehicleDAO {
 
     @Query("UPDATE Vehicle SET mileage = :value WHERE reg_no=:Reg_NO")
     void updateMileage(String value, String Reg_NO);
+
+    @Query("UPDATE Vehicle SET insurance_expiry_date = :value WHERE reg_no=:insuranceDate")
+    void updateInsuranceDate(String value, String insuranceDate);
 }

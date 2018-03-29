@@ -13,7 +13,7 @@ import com.example.amila.autocare.Database.entities.Vehicle;
 /**
  * Created by amila on 3/5/18.
  */
-@Database(entities = {Vehicle.class, Expenses.class}, version = 17, exportSchema = false)
+@Database(entities = {Vehicle.class, Expenses.class}, version = 18, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase{
 
     private static AppDatabase INSTANCE;

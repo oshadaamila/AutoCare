@@ -19,6 +19,10 @@ public class Vehicle {
     private String reg_no;
     @ColumnInfo(name = "mileage")
     private String mileage;
+
+
+    @ColumnInfo(name = "reg_no_number")
+    private String reg_no_number;
     @ColumnInfo(name = "brand")
     private String brand;
     @ColumnInfo(name = "model")
@@ -30,8 +34,8 @@ public class Vehicle {
     @ColumnInfo(name = "next_service_date")
     private String next_service_date;
 
-    public Vehicle(String brand,String model, String reg_no, String insurance_expiry_date,
-                   String revenue_license_expiry_date, String next_service_date,String name,String mileage){
+    public Vehicle(String brand, String model, String reg_no, String reg_no_number, String insurance_expiry_date,
+                   String revenue_license_expiry_date, String next_service_date, String name, String mileage){
         this.brand=brand;
         this.model = model;
         this.reg_no=reg_no;
@@ -40,6 +44,7 @@ public class Vehicle {
         this.next_service_date = next_service_date;
         this.name=name;
         this.mileage = mileage;
+        this.reg_no_number = reg_no_number;
     }
 
     public String getRevenue_license_expiry_date() {
@@ -104,5 +109,13 @@ public class Vehicle {
 
     public void setMileage(String mileage) {
         this.mileage = mileage;
+    }
+
+    public String getReg_no_number() {
+        return reg_no_number;
+    }
+
+    public void setReg_no_number(String reg_no_number) {
+        this.reg_no_number = reg_no_number;
     }
 }
