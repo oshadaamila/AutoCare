@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.amila.autocare.Adapter.VehicleAdapter;
 import com.example.amila.autocare.Database.AppDatabase;
 import com.example.amila.autocare.Database.entities.Vehicle;
+import com.example.amila.autocare.Expenses.add_expense;
 import com.example.amila.autocare.ManageVehicles.add_edit_vehicle;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -176,6 +177,9 @@ public class navigationDrawer extends AppCompatActivity
 
         }else if(id==R.id.search_for_places){
             Intent intent =   new Intent(getApplicationContext(),searchForPlaces.class);
+            startActivity(intent);
+        } else if (id == R.id.enter_expenses) {
+            Intent intent = new Intent(getApplicationContext(), add_expense.class);
             startActivity(intent);
         }
 

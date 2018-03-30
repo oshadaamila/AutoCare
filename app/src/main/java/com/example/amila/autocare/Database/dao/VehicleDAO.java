@@ -1,5 +1,6 @@
 package com.example.amila.autocare.Database.dao;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
@@ -16,6 +17,9 @@ public interface VehicleDAO {
 
     @Query("SELECT * FROM Vehicle")
     List<Vehicle> getAll();
+
+    @Query("SELECT name FROM Vehicle")
+    LiveData<List<String>> getAllNames();
 
     @Insert
     void insertAll(Vehicle...vehicles);
@@ -40,4 +44,10 @@ public interface VehicleDAO {
 
     @Query("UPDATE Vehicle SET insurance_expiry_date = :value WHERE reg_no=:insuranceDate")
     void updateInsuranceDate(String value, String insuranceDate);
+
+    @Query("UPDATE Vehicle SET revenue_license_expiry_date = :value WHERE reg_no=:revenueLicenseDate")
+    void updateRevenueLicense(String value, String revenueLicenseDate);
+
+    @Query("UPDATE Vehicle SET next_service_date = :value WHERE reg_no=:nextServiceDate")
+    void updateNextServiceDate(String value, String nextServiceDate);
 }

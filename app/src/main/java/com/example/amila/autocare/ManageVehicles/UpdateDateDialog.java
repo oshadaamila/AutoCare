@@ -24,16 +24,17 @@ import java.util.Date;
 @SuppressLint("ValidFragment")
 public class UpdateDateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    String category, id;
+    String category, id, reg_number;
     AppDatabase appDatabase;
     ScheduleClient scheduleclient1;
 
     private ViewVehicle viewvehicle;
 
     @SuppressLint("ValidFragment")
-    public UpdateDateDialog(String id, String category) {
+    public UpdateDateDialog(String id, String category, String reg_number) {
         this.category = category;
         this.id = id;
+        this.reg_number = reg_number;
     }
 
     public UpdateDateDialog() {
@@ -56,10 +57,21 @@ public class UpdateDateDialog extends DialogFragment implements DatePickerDialog
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                appDatabase.vehicledao().updateInsuranceDate(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth(), id);
+                if (category.equals("insurance_date")) {
+                    appDatabase.vehicledao().updateInsuranceDate(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth(), id);
+                    scheduleclient1.setAlarmForNotification(dateStringConverter(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth()), "Insurance Expiry Update", reg_number + "1");
+
+                } else if (category.equals("revenue_license")) {
+                    appDatabase.vehicledao().updateRevenueLicense(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth(), id);
+                    scheduleclient1.setAlarmForNotification(dateStringConverter(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth()), "Revenue License Update", reg_number + "2");
+
+                } else if (category.equals("next_service")) {
+                    appDatabase.vehicledao().updateNextServiceDate(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth(), id);
+                    scheduleclient1.setAlarmForNotification(dateStringConverter(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth()), "Next Service Update", reg_number + "3");
+
+                }
             }
         });
-        scheduleclient1.setAlarmForNotification(dateStringConverter(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth()), "Insurance Expiry Update", id + "1");
         viewvehicle.recreate();
         dismiss();
     }
