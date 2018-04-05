@@ -33,7 +33,7 @@
             android:id="@+id/spinner_select_vehicle"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            tools:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color" />
+            tools:background="@color/cast_expanded_controller_text_color" />
 
         <TextView
             android:id="@+id/textView15"
@@ -46,6 +46,47 @@
             android:id="@+id/spinner_category"
             android:layout_width="match_parent"
             android:layout_height="37dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter Amount"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editText_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="amount"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView_date_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/button_add_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="Add" />
+        </RelativeLayout>
 
     </LinearLayout>
 

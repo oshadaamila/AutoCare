@@ -2,6 +2,7 @@ package com.example.amila.autocare.Database.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -10,13 +11,30 @@ import android.support.annotation.NonNull;
  */
 @Entity(tableName = "ExpenseCategory")
 public class ExpenseCategory {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
+    @ColumnInfo(name = "id")
+    int id;
     @ColumnInfo(name = "category")
     String category;
 
     public ExpenseCategory(String category) {
         this.category = category;
+    }
+
+    @Ignore
+    public ExpenseCategory(@NonNull int id, String category) {
+        this.id = id;
+        this.category = category;
+    }
+
+    @NonNull
+    public int getId() {
+        return id;
+    }
+
+    public void setId(@NonNull int id) {
+        this.id = id;
     }
 
     public String getCategory() {

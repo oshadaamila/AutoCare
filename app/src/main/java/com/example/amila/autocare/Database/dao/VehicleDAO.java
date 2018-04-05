@@ -18,8 +18,8 @@ public interface VehicleDAO {
     @Query("SELECT * FROM Vehicle")
     List<Vehicle> getAll();
 
-    @Query("SELECT name FROM Vehicle")
-    LiveData<List<String>> getAllNames();
+    @Query("SELECT reg_no FROM Vehicle")
+    LiveData<List<String>> getAllRegNO();
 
     @Insert
     void insertAll(Vehicle...vehicles);

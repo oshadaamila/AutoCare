@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.support.v4.app.Fragment;
 
 import java.util.Calendar;
 
@@ -18,6 +17,12 @@ import java.util.Calendar;
 @SuppressLint("ValidFragment")
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
     int id;
+
+    @SuppressLint("ValidFragment")
+    public DatePickerFragment(int id) {
+        this.id = id;
+    }
+
     public Dialog onCreateDialog(Bundle savedInstanceState){
         final Calendar c =Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -25,16 +30,14 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int day = c.get(Calendar.DATE);
         return  new DatePickerDialog(getActivity(),this,year,month,day);
     }
-    @SuppressLint("ValidFragment")
-    public DatePickerFragment(int id){
-        this.id=id;
-    }
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
 
-        TextView tv1= (TextView) getActivity().findViewById(id);
-        tv1.setText(view.getYear()+"/"+view.getMonth()+"/"+view.getDayOfMonth());
+        TextView tv1 = getActivity().findViewById(id);
+        int month2 = view.getMonth() + 1;
+        tv1.setText(view.getDayOfMonth() + "-" + month2 + "-" + view.getYear());
 
     }
 

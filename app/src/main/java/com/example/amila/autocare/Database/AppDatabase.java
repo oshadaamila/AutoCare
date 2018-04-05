@@ -34,10 +34,11 @@ public abstract class AppDatabase extends RoomDatabase{
                             AsyncTask.execute(new Runnable() {
                                 @Override
                                 public void run() {
-                                    ExpenseCategory cat1 = new ExpenseCategory("Fuel");
+                                    ExpenseCategory cat1 = new ExpenseCategory("Add new category...");
+                                    ExpenseCategory cat4 = new ExpenseCategory("Fuel");
                                     ExpenseCategory cat2 = new ExpenseCategory("Spare Parts");
                                     ExpenseCategory cat3 = new ExpenseCategory("Extra");
-                                    ExpenseCategory cat4 = new ExpenseCategory("Add new category...");
+
                                     getAppDatabase(context).expenseCategoryDAO().insertAll(cat1, cat2, cat3, cat4);
                                 }
                             });

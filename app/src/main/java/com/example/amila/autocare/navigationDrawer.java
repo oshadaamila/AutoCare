@@ -179,6 +179,7 @@ public class navigationDrawer extends AppCompatActivity
             Intent intent =   new Intent(getApplicationContext(),searchForPlaces.class);
             startActivity(intent);
         } else if (id == R.id.enter_expenses) {
+            String currentDBPath = getDatabasePath("database").getAbsolutePath();
             Intent intent = new Intent(getApplicationContext(), add_expense.class);
             startActivity(intent);
         }

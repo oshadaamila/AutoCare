@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(mAuth.getCurrentUser()!=null){*/
         super.onCreate(savedInstanceState);
             finish();
-            startActivity(new Intent(this,navigationDrawer.class));
+
+        startActivity(new Intent(this,navigationDrawer.class));
         /*}else {
             setContentView(R.layout.activity_main);
             editTextemail = findViewById(R.id.email);

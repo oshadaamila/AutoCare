@@ -38,10 +38,9 @@ public class Expenses {
     @ColumnInfo(name = "description")
     private String description;
 
-    public Expenses(String reg_no, @NonNull int expense_id, String category, float expense,
+    public Expenses(String reg_no, String category, float expense,
                     int year, int month, int date, String time, String description) {
         this.reg_no = reg_no;
-        this.expense_id = expense_id;
         this.category = category;
         this.expense = expense;
         this.year = year;

@@ -18,7 +18,7 @@ public interface ExpenseCategoryDAO {
     @Insert
     void insertAll(ExpenseCategory... expenseCategories);
 
-    @Query("SELECT category FROM ExpenseCategory")
+    @Query("SELECT category FROM ExpenseCategory ORDER BY id DESC")
     LiveData<List<String>> getAllCategories();
 }
 
