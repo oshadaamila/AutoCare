@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_attach_money"
             android:title="Enter Expenses" />
         <item
+            android:id="@+id/view_expenses"
+            android:icon="@drawable/ic_attach_money"
+            android:title="View Expwnses" />
+        <item
             android:id="@+id/search_for_places"
             android:icon="@drawable/ic_my_location"
             android:title="Search For Places" />
@@ -31,7 +35,7 @@
         <menu>
             <item
                 android:id="@+id/register_service_center"
-                android:title="Do you own a serice center?" />
+                android:title="Do you own a service center?" />
             <item
                 android:id="@+id/logout"
                 android:title="Logout" />

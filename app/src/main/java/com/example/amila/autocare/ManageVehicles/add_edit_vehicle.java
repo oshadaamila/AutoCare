@@ -146,7 +146,7 @@ public class add_edit_vehicle extends AppCompatActivity {
 
     private Calendar dateStringConverter(String date) {
         Calendar c = Calendar.getInstance();
-        String pattern = "y/M/d";
+        String pattern = "d-M-y";
         Date date1 = null;
         try {
             date1 = new SimpleDateFormat(pattern).parse(date);

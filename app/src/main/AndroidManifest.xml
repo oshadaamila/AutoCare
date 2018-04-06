@@ -89,7 +89,8 @@
             android:label="@string/title_activity_search_for_places" />
         <activity android:name=".Reminders.ReminderActivity" />
         <activity android:name=".Expenses.add_expense" />
-        <activity android:name=".ManageVehicles.ViewVehicle"></activity>
+        <activity android:name=".ManageVehicles.ViewVehicle" />
+        <activity android:name=".Expenses.ViewExpense"></activity>
     </application>
 
 </manifest>
