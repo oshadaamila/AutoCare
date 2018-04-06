@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.amila.autocare.Adapter.VehicleAdapter;
 import com.example.amila.autocare.Database.AppDatabase;
 import com.example.amila.autocare.Database.entities.Vehicle;
+import com.example.amila.autocare.Expenses.ViewExpense;
 import com.example.amila.autocare.Expenses.add_expense;
 import com.example.amila.autocare.ManageVehicles.add_edit_vehicle;
 import com.google.firebase.auth.FirebaseAuth;
@@ -182,7 +183,8 @@ public class navigationDrawer extends AppCompatActivity
             Intent intent = new Intent(getApplicationContext(), add_expense.class);
             startActivity(intent);
         } else if (id == R.id.view_expenses) {
-
+            Intent intent = new Intent(getApplicationContext(), ViewExpense.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
