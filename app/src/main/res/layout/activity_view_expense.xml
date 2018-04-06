@@ -29,26 +29,60 @@
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioButton
-        android:id="@+id/radioButton_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:text="By Category"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/radioButton_date"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <RadioButton
-        android:id="@+id/radioButton_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="24dp"
-        android:text="By Date"
-        android:textSize="18sp"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="281dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="88dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.747"
-        app:layout_constraintStart_toEndOf="@+id/radioButton_category"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_vehicle" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButton_category"
+            style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:text="By Category"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/radioButton_date"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <RadioButton
+            android:id="@+id/radioButton_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="By Date"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.747"
+            app:layout_constraintStart_toEndOf="@+id/radioButton_category"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_vehicle" />
+    </RadioGroup>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="359dp"
+        android:layout_height="500dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="136dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="127dp" />
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
