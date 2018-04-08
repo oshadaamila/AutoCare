@@ -6,6 +6,8 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.util.Date;
+
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 /**
@@ -27,24 +29,23 @@ public class Expenses {
     private String category;
     @ColumnInfo(name = "expense")
     private float expense;
-    @ColumnInfo(name = "year")
+    /*@ColumnInfo(name = "year")
     private int year;
     @ColumnInfo(name = "month")
-    private int month;
+    private int month;*/
     @ColumnInfo(name = "date")
-    private int date;
+    private Date date;
     @ColumnInfo(name = "time")
     private String time;
     @ColumnInfo(name = "description")
     private String description;
 
-    public Expenses(String reg_no, String category, float expense,
-                    int year, int month, int date, String time, String description) {
+    public Expenses(String reg_no, String category, float expense, Date date, String time, String description) {
         this.reg_no = reg_no;
         this.category = category;
         this.expense = expense;
-        this.year = year;
-        this.month = month;
+        /*this.year = year;
+        this.month = month;*/
         this.date = date;
         this.time = time;
         this.description = description;
@@ -83,7 +84,7 @@ public class Expenses {
         this.expense = expense;
     }
 
-    public int getYear() {
+    /*public int getYear() {
         return year;
     }
 
@@ -97,13 +98,13 @@ public class Expenses {
 
     public void setMonth(int month) {
         this.month = month;
-    }
+    }*/
 
-    public int getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

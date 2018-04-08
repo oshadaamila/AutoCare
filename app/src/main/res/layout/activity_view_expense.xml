@@ -82,7 +82,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="127dp" />
+            android:layout_marginBottom="127dp"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

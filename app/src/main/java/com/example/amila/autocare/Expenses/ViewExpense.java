@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -43,6 +44,7 @@ public class ViewExpense extends AppCompatActivity {
         vehicleDAO = database.vehicledao();
         expenseDAO = database.expensedao();
         loadSpinnerData();
+        //showByCategories();
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -76,6 +78,7 @@ public class ViewExpense extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<CategorySum> categorySums) {
                 PieChart chart = findViewById(R.id.chart);
+                chart.setVisibility(View.VISIBLE);
                 List<PieEntry> entries = new ArrayList<>();
                 for (CategorySum CS : categorySums) {
                     entries.add(new PieEntry(Float.parseFloat(CS.getSum()), CS.getCategory()));

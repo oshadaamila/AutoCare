@@ -115,8 +115,7 @@ public class add_expense extends AppCompatActivity {
         }
         c.setTime(date1);
         final Expenses expense = new Expenses(vehicle.getSelectedItem().toString(), category.getSelectedItem().toString(),
-                Float.parseFloat(amount.getText().toString()), c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1
-                , c.get(Calendar.DATE), time, "test");
+                Float.parseFloat(amount.getText().toString()), date1, time, "test");
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {

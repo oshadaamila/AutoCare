@@ -4,6 +4,7 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.example.amila.autocare.Database.entities.Vehicle;
  * Created by amila on 3/5/18.
  */
 @Database(entities = {Vehicle.class, Expenses.class, ExpenseCategory.class}, version = 18, exportSchema = false)
+@TypeConverters({DateTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase{
 
     private static AppDatabase INSTANCE;
