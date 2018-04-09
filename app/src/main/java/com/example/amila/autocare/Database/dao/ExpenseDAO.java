@@ -8,6 +8,7 @@ import android.arch.persistence.room.Query;
 import com.example.amila.autocare.Database.POJOS.CategorySum;
 import com.example.amila.autocare.Database.entities.Expenses;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,4 +22,7 @@ public interface ExpenseDAO {
 
     @Query("select category,sum(expense) as sum from expenses where reg_no =:Reg_NO group by category")
     LiveData<List<CategorySum>> getCategoriesAndSums(String Reg_NO);
+
+    @Query("SELECT * FROM expenses WHERE date BETWEEN (:from) AND date(:to) ")
+    LiveData<List<Expenses>> getExpensesByDate(Date from, Date to);
 }

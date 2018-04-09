@@ -3,17 +3,23 @@ package com.example.amila.autocare.Expenses;
 import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.amila.autocare.Database.AppDatabase;
 import com.example.amila.autocare.Database.POJOS.CategorySum;
 import com.example.amila.autocare.Database.dao.ExpenseDAO;
 import com.example.amila.autocare.Database.dao.VehicleDAO;
+import com.example.amila.autocare.Database.entities.Expenses;
+import com.example.amila.autocare.DatePickerFragment;
 import com.example.amila.autocare.R;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -21,7 +27,12 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,6 +43,7 @@ public class ViewExpense extends AppCompatActivity {
     AppDatabase database;
     VehicleDAO vehicleDAO;
     ExpenseDAO expenseDAO;
+    TextView toDate, fromDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +52,27 @@ public class ViewExpense extends AppCompatActivity {
         byCategory = findViewById(R.id.radioButton_category);
         byDate = findViewById(R.id.radioButton_date);
         radioGroup = findViewById(R.id.radioGroup);
+        toDate = findViewById(R.id.textView_to_date);
+        fromDate = findViewById(R.id.textView_from_date);
         database = AppDatabase.getAppDatabase(getApplicationContext());
         vehicleDAO = database.vehicledao();
         expenseDAO = database.expensedao();
         loadSpinnerData();
-        //showByCategories();
+        setDates();
+        toDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DatePickerFragment(toDate.getId());
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
+        fromDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DatePickerFragment(fromDate.getId());
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -52,10 +80,40 @@ public class ViewExpense extends AppCompatActivity {
                     showByCategories();
                 } else if (byDate.isChecked()) {
                     //code to show expenses by date
+                    showByExpenses();
                 }
             }
         });
 
+    }
+
+    private void showByExpenses() {
+        Date to = null;
+        Date from = null;
+        try {
+            from = new SimpleDateFormat("d-M-y").parse(fromDate.getText().toString());
+            to = new SimpleDateFormat("d-M-y").parse(toDate.getText().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        expenseDAO.getExpensesByDate(from, to).observe(this, new Observer<List<Expenses>>() {
+            @Override
+            public void onChanged(@Nullable List<Expenses> expenses) {
+                PieChart chart = findViewById(R.id.chart);
+                RecyclerView rv = findViewById(R.id.recycler_view_expenses);
+                rv.setVisibility(View.VISIBLE);
+                chart.setVisibility(View.INVISIBLE);
+                rv.setHasFixedSize(true);
+
+                // use a linear layout manager
+                LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                rv.setLayoutManager(mLayoutManager);
+
+                // specify an adapter (see also next example)
+                MyAdapter mAdapter = new MyAdapter(expenses);
+                rv.setAdapter(mAdapter);
+            }
+        });
     }
 
     private void loadSpinnerData() {
@@ -78,6 +136,8 @@ public class ViewExpense extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<CategorySum> categorySums) {
                 PieChart chart = findViewById(R.id.chart);
+                RecyclerView rv = findViewById(R.id.recycler_view_expenses);
+                rv.setVisibility(View.INVISIBLE);
                 chart.setVisibility(View.VISIBLE);
                 List<PieEntry> entries = new ArrayList<>();
                 for (CategorySum CS : categorySums) {
@@ -90,5 +150,14 @@ public class ViewExpense extends AppCompatActivity {
                 chart.invalidate();
             }
         });
+    }
+
+    private void setDates() {
+        Calendar c = Calendar.getInstance();
+        Date today = c.getTime();
+        DateFormat df = new SimpleDateFormat("d-M-y");
+        String date = df.format(today).toString();
+        toDate.setText(date);
+        fromDate.setText(date);
     }
 }
