@@ -62,17 +62,33 @@ public class ViewExpense extends AppCompatActivity {
         toDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (byCategory.isChecked()) {
+                    byCategory.setChecked(false);
+                } else if (byDate.isChecked()) {
+                    byDate.setChecked(false);
+                }
+
+
                 DialogFragment newFragment = new DatePickerFragment(toDate.getId());
                 newFragment.show(getSupportFragmentManager(), "datePicker");
+
+
             }
         });
         fromDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (byCategory.isChecked()) {
+                    byCategory.setChecked(false);
+                } else if (byDate.isChecked()) {
+                    byDate.setChecked(false);
+                }
                 DialogFragment newFragment = new DatePickerFragment(fromDate.getId());
                 newFragment.show(getSupportFragmentManager(), "datePicker");
+
             }
         });
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -81,6 +97,11 @@ public class ViewExpense extends AppCompatActivity {
                 } else if (byDate.isChecked()) {
                     //code to show expenses by date
                     showByExpenses();
+                } else {
+                    PieChart chart = findViewById(R.id.chart);
+                    RecyclerView rv = findViewById(R.id.recycler_view_expenses);
+                    rv.setVisibility(View.INVISIBLE);
+                    chart.setVisibility(View.INVISIBLE);
                 }
             }
         });
