@@ -1,18 +1,23 @@
 package com.example.amila.autocare.Expenses;
 
 import android.arch.lifecycle.Observer;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.amila.autocare.Database.AppDatabase;
 import com.example.amila.autocare.Database.POJOS.CategorySum;
@@ -21,6 +26,7 @@ import com.example.amila.autocare.Database.dao.VehicleDAO;
 import com.example.amila.autocare.Database.entities.Expenses;
 import com.example.amila.autocare.DatePickerFragment;
 import com.example.amila.autocare.R;
+import com.example.amila.autocare.navigationDrawer;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -44,6 +50,8 @@ public class ViewExpense extends AppCompatActivity {
     VehicleDAO vehicleDAO;
     ExpenseDAO expenseDAO;
     TextView toDate, fromDate;
+    RecyclerView rv;
+    Button show;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,21 +62,29 @@ public class ViewExpense extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioGroup);
         toDate = findViewById(R.id.textView_to_date);
         fromDate = findViewById(R.id.textView_from_date);
+        show = findViewById(R.id.button_show);
+        rv = findViewById(R.id.recycler_view_expenses);
+
+        rv.setHasFixedSize(true);
+        // use a linear layout manager
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        rv.setLayoutManager(mLayoutManager);
+        rv.addItemDecoration(new navigationDrawer.GridSpacingItemDecoration(2, dpToPx(10), true));
+        rv.setItemAnimator(new DefaultItemAnimator());
+
         database = AppDatabase.getAppDatabase(getApplicationContext());
         vehicleDAO = database.vehicledao();
         expenseDAO = database.expensedao();
+
         loadSpinnerData();
         setDates();
         toDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (byCategory.isChecked()) {
-                    byCategory.setChecked(false);
-                } else if (byDate.isChecked()) {
-                    byDate.setChecked(false);
-                }
-
-
+                PieChart chart = findViewById(R.id.chart);
+                RecyclerView rv = findViewById(R.id.recycler_view_expenses);
+                rv.setVisibility(View.INVISIBLE);
+                chart.setVisibility(View.INVISIBLE);
                 DialogFragment newFragment = new DatePickerFragment(toDate.getId());
                 newFragment.show(getSupportFragmentManager(), "datePicker");
 
@@ -78,26 +94,25 @@ public class ViewExpense extends AppCompatActivity {
         fromDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (byCategory.isChecked()) {
-                    byCategory.setChecked(false);
-                } else if (byDate.isChecked()) {
-                    byDate.setChecked(false);
-                }
+                PieChart chart = findViewById(R.id.chart);
+                RecyclerView rv = findViewById(R.id.recycler_view_expenses);
+                rv.setVisibility(View.INVISIBLE);
+                chart.setVisibility(View.INVISIBLE);
                 DialogFragment newFragment = new DatePickerFragment(fromDate.getId());
                 newFragment.show(getSupportFragmentManager(), "datePicker");
 
             }
         });
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        show.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+            public void onClick(View v) {
                 if (byCategory.isChecked()) {
                     showByCategories();
                 } else if (byDate.isChecked()) {
                     //code to show expenses by date
                     showByExpenses();
                 } else {
+                    Toast.makeText(getApplicationContext(), "Select Category or Date", Toast.LENGTH_SHORT).show();
                     PieChart chart = findViewById(R.id.chart);
                     RecyclerView rv = findViewById(R.id.recycler_view_expenses);
                     rv.setVisibility(View.INVISIBLE);
@@ -105,6 +120,17 @@ public class ViewExpense extends AppCompatActivity {
                 }
             }
         });
+        radioGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PieChart chart = findViewById(R.id.chart);
+                RecyclerView rv = findViewById(R.id.recycler_view_expenses);
+                rv.setVisibility(View.INVISIBLE);
+                chart.setVisibility(View.INVISIBLE);
+            }
+        });
+
+
 
     }
 
@@ -124,12 +150,13 @@ public class ViewExpense extends AppCompatActivity {
                 RecyclerView rv = findViewById(R.id.recycler_view_expenses);
                 rv.setVisibility(View.VISIBLE);
                 chart.setVisibility(View.INVISIBLE);
-                rv.setHasFixedSize(true);
+                /*rv.setHasFixedSize(true);
 
                 // use a linear layout manager
                 LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 rv.setLayoutManager(mLayoutManager);
-
+                rv.addItemDecoration(new navigationDrawer.GridSpacingItemDecoration(2, dpToPx(10), true));
+                rv.setItemAnimator(new DefaultItemAnimator());*/
                 // specify an adapter (see also next example)
                 MyAdapter mAdapter = new MyAdapter(expenses);
                 rv.setAdapter(mAdapter);
@@ -181,4 +208,10 @@ public class ViewExpense extends AppCompatActivity {
         toDate.setText(date);
         fromDate.setText(date);
     }
+
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
 }
+

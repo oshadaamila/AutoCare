@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.example.amila.autocare.Database.entities.Expenses;
 import com.example.amila.autocare.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +42,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
+        DateFormat df = new SimpleDateFormat("d-M-y");
+
+        String date = df.format(mDataset.get(position).getDate());
         holder.category.setText(mDataset.get(position).getCategory());
         holder.sum.setText((Float.toString(mDataset.get(position).getExpense())));
+        holder.date.setText(date);
+        holder.time.setText(mDataset.get(position).getTime());
 
     }
 
@@ -57,12 +64,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView sum;
-        public TextView category;
+        public TextView category, date, time;
 
         public ViewHolder(View v) {
             super(v);
             sum = v.findViewById(R.id.textView_sum);
             category = v.findViewById(R.id.textView_category);
+            date = v.findViewById(R.id.textView_date);
+            time = v.findViewById(R.id.textView_time);
         }
     }
 }
