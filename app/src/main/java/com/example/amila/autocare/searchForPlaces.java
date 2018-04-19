@@ -274,6 +274,7 @@ public class searchForPlaces extends FragmentActivity implements
 
     public String getUrl(double latitude, double longitude, String cateogary) {
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=2000&type="+cateogary+"&key=AIzaSyAGEmXKuOc06L38gc0btsc8m0XS09z1-NM";
+
         return url;
     }
 
