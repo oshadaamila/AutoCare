@@ -21,7 +21,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.amila.autocare.search_for_places.GetNearbyPlacesData;
 import com.google.android.gms.common.ConnectionResult;
@@ -75,7 +74,7 @@ public class searchForPlaces extends FragmentActivity implements
 
     }
     private void setSpinnerValues(){
-        String [] cateogaries = {"Filling Stations","Spare Parts Stores","Service Centers"};
+        String[] cateogaries = {"Service Center", "Tyre Service Center", "Spare Part Store"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,cateogaries);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCateogary.setAdapter(arrayAdapter);
@@ -96,7 +95,7 @@ public class searchForPlaces extends FragmentActivity implements
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        mLatLng = new LatLng(7, 80);
+        mLatLng = new LatLng(6.9220, 79.7861);
         /*mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -243,12 +242,13 @@ public class searchForPlaces extends FragmentActivity implements
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent.getItemIdAtPosition(position)==0){
-            findCateogary("gas_station");
+            findCateogary("Service Center");
         }else if(parent.getItemIdAtPosition(position)==1){
             Log.d("spinnerTag",parent.getItemAtPosition(1).toString());
-            findCateogary("store");
+            findCateogary("Tyre Service Center");
         }else if(parent.getItemIdAtPosition(position)==2){
             Log.d("spinnerTag",parent.getItemAtPosition(2).toString());
+            findCateogary("Spare Part Store");
         }
     }
 
@@ -260,21 +260,20 @@ public class searchForPlaces extends FragmentActivity implements
     public void findCateogary(String cateogary){
         mMap.clear();
         String url = getUrl(mLatLng.latitude, mLatLng.longitude, cateogary);
-        Object[] DataTransfer = new Object[2];
+        Object[] DataTransfer = new Object[3];
         DataTransfer[0] = mMap;
         DataTransfer[1] = url;
+        DataTransfer[2] = getApplicationContext();
         Log.d("onClick", url);
         GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
         //getNearbyPlacesData.execute(DataTransfer);
         getNearbyPlacesData.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,DataTransfer);
         //getNearbyPlacesData.execute(DataTransfer);
-        Toast.makeText(getApplicationContext(),"Nearby "+ cateogary, Toast.LENGTH_LONG).show();
-
     }
 
     public String getUrl(double latitude, double longitude, String cateogary) {
-        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=2000&type="+cateogary+"&key=AIzaSyAGEmXKuOc06L38gc0btsc8m0XS09z1-NM";
-
+        //String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=2000&type="+cateogary+"&key=AIzaSyAGEmXKuOc06L38gc0btsc8m0XS09z1-NM";
+        String url = "https://troppo-parachutes.000webhostapp.com/includes/get_nearby_stores.php?lat=" + latitude + "&lng=" + longitude;
         return url;
     }
 
