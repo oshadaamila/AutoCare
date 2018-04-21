@@ -242,13 +242,13 @@ public class searchForPlaces extends FragmentActivity implements
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent.getItemIdAtPosition(position)==0){
-            findCateogary("Service Center");
+            findCateogary("Service%20Center");
         }else if(parent.getItemIdAtPosition(position)==1){
             Log.d("spinnerTag",parent.getItemAtPosition(1).toString());
-            findCateogary("Tyre Service Center");
+            findCateogary("Tyre%20Service%20Center");
         }else if(parent.getItemIdAtPosition(position)==2){
             Log.d("spinnerTag",parent.getItemAtPosition(2).toString());
-            findCateogary("Spare Part Store");
+            findCateogary("Spare%20Part%20Store");
         }
     }
 
@@ -273,7 +273,7 @@ public class searchForPlaces extends FragmentActivity implements
 
     public String getUrl(double latitude, double longitude, String cateogary) {
         //String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius=2000&type="+cateogary+"&key=AIzaSyAGEmXKuOc06L38gc0btsc8m0XS09z1-NM";
-        String url = "https://troppo-parachutes.000webhostapp.com/includes/get_nearby_stores.php?lat=" + latitude + "&lng=" + longitude;
+        String url = "https://troppo-parachutes.000webhostapp.com/includes/get_nearby_stores.php?lat=" + latitude + "&lng=" + longitude + "&category=" + cateogary;
         return url;
     }
 
