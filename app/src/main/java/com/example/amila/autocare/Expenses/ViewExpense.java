@@ -1,5 +1,6 @@
 package com.example.amila.autocare.Expenses;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class ViewExpense extends AppCompatActivity {
     TextView toDate, fromDate;
     RecyclerView rv;
     Button show;
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,14 +66,13 @@ public class ViewExpense extends AppCompatActivity {
         fromDate = findViewById(R.id.textView_from_date);
         show = findViewById(R.id.button_show);
         rv = findViewById(R.id.recycler_view_expenses);
-
-        rv.setHasFixedSize(true);
+        activity = this;
+        //rv.setHasFixedSize(true);
         // use a linear layout manager
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(mLayoutManager);
-        rv.addItemDecoration(new navigationDrawer.GridSpacingItemDecoration(2, dpToPx(10), true));
+        rv.addItemDecoration(new navigationDrawer.GridSpacingItemDecoration(1, dpToPx(10), true));
         rv.setItemAnimator(new DefaultItemAnimator());
-
         database = AppDatabase.getAppDatabase(getApplicationContext());
         vehicleDAO = database.vehicledao();
         expenseDAO = database.expensedao();
@@ -158,7 +159,7 @@ public class ViewExpense extends AppCompatActivity {
                 rv.addItemDecoration(new navigationDrawer.GridSpacingItemDecoration(2, dpToPx(10), true));
                 rv.setItemAnimator(new DefaultItemAnimator());*/
                 // specify an adapter (see also next example)
-                MyAdapter mAdapter = new MyAdapter(expenses);
+                MyAdapter mAdapter = new MyAdapter(expenses, activity);
                 rv.setAdapter(mAdapter);
             }
         });
