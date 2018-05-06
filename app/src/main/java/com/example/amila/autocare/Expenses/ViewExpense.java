@@ -159,7 +159,7 @@ public class ViewExpense extends AppCompatActivity {
                 rv.addItemDecoration(new navigationDrawer.GridSpacingItemDecoration(2, dpToPx(10), true));
                 rv.setItemAnimator(new DefaultItemAnimator());*/
                 // specify an adapter (see also next example)
-                MyAdapter mAdapter = new MyAdapter(expenses, activity);
+                MyAdapter mAdapter = new MyAdapter(expenses, activity, getApplicationContext());
                 rv.setAdapter(mAdapter);
             }
         });

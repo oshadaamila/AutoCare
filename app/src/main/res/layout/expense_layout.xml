@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/button_delete_expense_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_save_expense_dialog"
+        android:layout_alignBottom="@+id/button_save_expense_dialog"
+        android:layout_marginEnd="21dp"
+        android:layout_toStartOf="@+id/button_save_expense_dialog"
+        android:text="Delete" />
+
+    <Button
+        android:id="@+id/button_save_expense_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="13dp"
+        android:layout_marginTop="182dp"
+        android:text="Save" />
+
+    <TextView
+        android:id="@+id/textView_expense_date"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_expense_time"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView_expense_date"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spinner_expense_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView_expense_time"
+        android:layout_weight="1" />
+
+    <EditText
+        android:id="@+id/editText_amount_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinner_expense_dialog"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Amount" />
+
+</RelativeLayout>

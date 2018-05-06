@@ -1,6 +1,10 @@
 package com.example.amila.autocare.Expenses;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +24,14 @@ import java.util.List;
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     final Activity mActivity;
+    final Context mContext;
     private List<Expenses> mDataset = new ArrayList<>();
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Expenses> expenses, Activity mActivity) {
+    public MyAdapter(List<Expenses> expenses, Activity mActivity, Context mContext) {
 
         this.mDataset = expenses;
         this.mActivity = mActivity;
+        this.mContext = mContext;
     }
 
     // Create new views (invoked by the layout manager)
@@ -36,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.expense_card, parent, false);
-        ViewHolder vh = new ViewHolder(v, mActivity);
+        ViewHolder vh = new ViewHolder(v, mActivity, mContext);
         return vh;
     }
 
@@ -67,22 +73,41 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final Activity mActivity;
+        final Context mContext;
         // each data item is just a string in this case
         public TextView sum;
         public TextView category, date, time;
         public int id;
 
-        public ViewHolder(View v, final Activity mActivity) {
+        public ViewHolder(View v, final Activity mActivity, final Context mContext) {
             super(v);
             sum = v.findViewById(R.id.textView_sum);
             category = v.findViewById(R.id.textView_category);
             date = v.findViewById(R.id.textView_date);
             time = v.findViewById(R.id.textView_time);
             this.mActivity = mActivity;
+            this.mContext = mContext;
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Toast.makeText(mContext,Integer.toString(id),Toast.LENGTH_LONG).show();
+                    FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
+                    Fragment prev = mActivity.getFragmentManager().findFragmentByTag("dialog");
+                    if (prev != null) {
+                        ft.remove(prev);
+                    }
+                    ft.addToBackStack(null);
+
+                    // Create and show the dialog.
+                    EditExpense newFragment = new EditExpense();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("expense_id", id);
+                    bundle.putString("date", date.getText().toString());
+                    bundle.putString("time", time.getText().toString());
+                    bundle.putString("amount", sum.getText().toString());
+                    bundle.putString("category", category.getText().toString());
+                    newFragment.setArguments(bundle);
+                    newFragment.show(ft, "dialog");
 
                 }
             });

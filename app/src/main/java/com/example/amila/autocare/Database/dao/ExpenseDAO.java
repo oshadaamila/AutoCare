@@ -25,4 +25,11 @@ public interface ExpenseDAO {
 
     @Query("SELECT * FROM expenses WHERE date BETWEEN :from AND :to")
     LiveData<List<Expenses>> getExpensesByDate(Date from, Date to);
+
+    @Query("DELETE FROM expenses WHERE expense_id=:id")
+    void deleteExpense(String id);
+
+    @Query("UPDATE expenses SET date=:date,time=:time,category=:category,expense=:expense WHERE " +
+            "expense_id=:expenseid")
+    void updateExpense(Date date, String time, String category, String expense, String expenseid);
 }
