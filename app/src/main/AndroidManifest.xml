@@ -90,7 +90,8 @@
         <activity android:name=".Reminders.ReminderActivity" />
         <activity android:name=".Expenses.add_expense" />
         <activity android:name=".ManageVehicles.ViewVehicle" />
-        <activity android:name=".Expenses.ViewExpense"></activity>
+        <activity android:name=".Expenses.ViewExpense" />
+        <activity android:name=".offers.ViewOffers"></activity>
     </application>
 
 </manifest>

@@ -27,6 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     final Context mContext;
     private List<Expenses> mDataset = new ArrayList<>();
     // Provide a suitable constructor (depends on the kind of dataset)
+
     public MyAdapter(List<Expenses> expenses, Activity mActivity, Context mContext) {
 
         this.mDataset = expenses;

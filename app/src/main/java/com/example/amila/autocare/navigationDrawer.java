@@ -29,6 +29,7 @@ import com.example.amila.autocare.Database.entities.Vehicle;
 import com.example.amila.autocare.Expenses.ViewExpense;
 import com.example.amila.autocare.Expenses.add_expense;
 import com.example.amila.autocare.ManageVehicles.add_edit_vehicle;
+import com.example.amila.autocare.offers.ViewOffers;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -184,6 +185,9 @@ public class navigationDrawer extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.view_expenses) {
             Intent intent = new Intent(getApplicationContext(), ViewExpense.class);
+            startActivity(intent);
+        } else if (id == R.id.view_offers) {
+            Intent intent = new Intent(getApplicationContext(), ViewOffers.class);
             startActivity(intent);
         }
 
