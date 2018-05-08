@@ -15,6 +15,10 @@ public class Offer {
         this.store_name = store_name;
     }
 
+    public Offer() {
+
+    }
+
     public String getStore_lat() {
         return store_lat;
     }
