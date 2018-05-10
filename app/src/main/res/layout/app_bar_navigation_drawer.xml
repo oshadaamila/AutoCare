@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.amila.autocare.navigationDrawer">
+    tools:context=".Views.Start.navigationDrawer">
     android:theme="@style/NoActionBar"
 
     <android.support.design.widget.AppBarLayout

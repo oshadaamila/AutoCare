@@ -1,5 +1,7 @@
 package com.example.amila.autocare;
 
+import com.example.amila.autocare.Views.search_for_places.searchForPlaces;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

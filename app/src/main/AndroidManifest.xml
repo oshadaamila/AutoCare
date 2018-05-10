@@ -13,6 +13,8 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
     <application
         android:allowBackup="true"
@@ -30,18 +32,18 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name=".Reminders.NotifyService" />
-        <service android:name=".Reminders.ScheduleService" />
+        <service android:name=".Views.Reminders.NotifyService" />
+        <service android:name=".Views.Reminders.ScheduleService" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Views.Start.MainActivity"
             android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".signup"
+            android:name=".Views.Start.signup"
             android:launchMode="singleInstance"
             android:theme="@style/autocare">
             <intent-filter>
@@ -49,28 +51,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".home"
+            android:name=".Views.Start.home"
             android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".profile"
+            android:name=".Views.Start.profile"
             android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".phone_number_request"
+            android:name=".Views.Start.phone_number_request"
             android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".navigationDrawer"
+            android:name=".Views.Start.navigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -79,19 +81,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ManageVehicles.add_edit_vehicle">
+        <activity android:name=".Views.ManageVehicles.add_edit_vehicle">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".searchForPlaces"
+            android:name=".Views.search_for_places.searchForPlaces"
             android:label="@string/title_activity_search_for_places" />
-        <activity android:name=".Reminders.ReminderActivity" />
-        <activity android:name=".Expenses.add_expense" />
-        <activity android:name=".ManageVehicles.ViewVehicle" />
-        <activity android:name=".Expenses.ViewExpense" />
-        <activity android:name=".offers.ViewOffers"></activity>
+        <activity android:name=".Views.Reminders.ReminderActivity" />
+        <activity android:name=".Views.Expenses.add_expense" />
+        <activity android:name=".Views.ManageVehicles.ViewVehicle" />
+        <activity android:name=".Views.Expenses.ViewExpense" />
+        <activity android:name=".Views.offers.ViewOffers"></activity>
+
+        <receiver
+            android:name=".Views.Reminders.ResetNotifications"
+            android:enabled="true"
+            android:exported="true"
+            android:label="ResetNotifications">
+            <intent-filter>
+                <action android:name="android.intent.action.AIRPLANE_MODE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
