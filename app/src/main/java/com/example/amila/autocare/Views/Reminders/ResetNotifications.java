@@ -36,8 +36,10 @@ public class ResetNotifications extends BroadcastReceiver {
                 public void run() {
                     vehicleList = appDatabase.vehicledao().getAll();
                     for (Vehicle x : vehicleList) {
+                        String date = x.getInsurance_expiry_date();
+                        //scheduleClient.setAlarmForNotification(dateStringConverter(x.getInsurance_expiry_date()), "Insurance Expiry", x.getReg_no_number(), x.getReg_no(), 1);
+                        new AlarmTask(mContext, dateStringConverter(x.getInsurance_expiry_date()), "Insurance Expiry", x.getReg_no_number(), x.getReg_no(), 1).run();
 
-                        scheduleClient.setAlarmForNotification(dateStringConverter(x.getInsurance_expiry_date()), "Insurance Expiry", x.getReg_no_number(), x.getReg_no(), 1);
                     }
                 }
             });

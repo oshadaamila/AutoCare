@@ -63,7 +63,10 @@ public class UpdateDateDialog extends DialogFragment implements DatePickerDialog
 
                 } else if (category.equals("revenue_license")) {
                     appDatabase.vehicledao().updateRevenueLicense(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth(), id);
-                    scheduleclient1.setAlarmForNotification(dateStringConverter(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth()), "Revenue License Update", reg_number + "2", id, 2);
+                    scheduleclient1.setAlarmForNotification(dateStringConverter(view.getYear() + "/"
+                                    + view.getMonth() + "/" + view.getDayOfMonth()), "Revenue License Update",
+                            reg_number + "2", id, 2);
+                    //new AlarmTask(getActivity(),dateStringConverter(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth()),"test",reg_number+"2",id,2).run();
 
                 } else if (category.equals("next_service")) {
                     appDatabase.vehicledao().updateNextServiceDate(view.getYear() + "/" + view.getMonth() + "/" + view.getDayOfMonth(), id);

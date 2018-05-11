@@ -99,6 +99,7 @@ public class add_edit_vehicle extends AppCompatActivity {
                     next_service_reminder.add(Calendar.DATE, -7);
                     scheduleclient1.setAlarmForNotification(insurance_remind_date,
                             "Insurance of " + name + " will expire soon!", requestCode + "1", reg_no, 1);
+                    //new AlarmTask(getApplicationContext(),insurance_remind_date,"testing",requestCode,reg_no,1).run();
                     scheduleclient2.setAlarmForNotification(revenue_license_reminder_date,
                             "Revenue License of" + name + " will expire soon!", requestCode + "2", reg_no, 2);
                     scheduleclient3.setAlarmForNotification(next_service_reminder,

@@ -37,7 +37,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
         TextView tv1 = getActivity().findViewById(id);
         int month2 = view.getMonth() + 1;
-        tv1.setText(view.getDayOfMonth() + "-" + month2 + "-" + view.getYear());
+        tv1.setText(view.getDayOfMonth() + "/" + month2 + "/" + view.getYear());
 
     }
 
