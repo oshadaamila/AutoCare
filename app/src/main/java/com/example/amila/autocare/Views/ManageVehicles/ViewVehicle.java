@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.amila.autocare.Database.AppDatabase;
@@ -18,6 +19,8 @@ public class ViewVehicle extends AppCompatActivity {
     Vehicle vehicle;
     TextView tv_insurance_date, tv_brand, tv_model, tv_revenue_license_expiry, tv_reg_no, tv_next_service, tv_name2, tv_mileage;
     AppDatabase appDatabase;
+    Button delete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,23 @@ public class ViewVehicle extends AppCompatActivity {
         tv_name2 = findViewById(R.id.textView_name);
         tv_mileage = findViewById(R.id.textView_mileage);
         tv_brand = findViewById(R.id.textView_brand);
+        delete = findViewById(R.id.delete_vehicle_btn);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+
+                // Create and show the dialog.
+                DeleteDialog newFragment = new DeleteDialog();
+
+                newFragment.show(ft, "dialog");
+            }
+        });
         vehicle = getVehicle(reg_no);
 
 

@@ -7,7 +7,7 @@
         <item
             android:id="@+id/edit_vehicle"
             android:icon="@drawable/ic_directions_car"
-            android:title="Edit Vehicles" />
+            android:title="Add New Vehicle" />
         <item
             android:id="@+id/enter_expenses"
             android:icon="@drawable/ic_attach_money"
@@ -23,7 +23,7 @@
 
         <item
             android:id="@+id/view_offers"
-            android:icon="@drawable/ic_action_user"
+            android:icon="@drawable/ic_card_giftcard"
             android:title="View Offers" />
         <item
             android:id="@+id/settings"
@@ -34,11 +34,8 @@
     <item android:title="Tasks">
         <menu>
             <item
-                android:id="@+id/register_service_center"
-                android:title="Do you own a service center?" />
-            <item
-                android:id="@+id/logout"
-                android:title="Logout" />
+                android:id="@+id/website_details"
+                android:title="Make Your Business With Us" />
 
         </menu>
     </item>

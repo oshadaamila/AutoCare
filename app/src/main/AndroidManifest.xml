@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -93,7 +92,7 @@
         <activity android:name=".Views.Expenses.add_expense" />
         <activity android:name=".Views.ManageVehicles.ViewVehicle" />
         <activity android:name=".Views.Expenses.ViewExpense" />
-        <activity android:name=".Views.offers.ViewOffers"></activity>
+        <activity android:name=".Views.offers.ViewOffers" />
 
         <receiver
             android:name=".Views.Reminders.ResetNotifications"
@@ -104,6 +103,8 @@
                 <action android:name="android.intent.action.AIRPLANE_MODE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".Views.Website.website_details"></activity>
     </application>
 
 </manifest>

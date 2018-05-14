@@ -30,9 +30,9 @@ import com.example.amila.autocare.Views.Adapter.VehicleAdapter;
 import com.example.amila.autocare.Views.Expenses.ViewExpense;
 import com.example.amila.autocare.Views.Expenses.add_expense;
 import com.example.amila.autocare.Views.ManageVehicles.add_edit_vehicle;
+import com.example.amila.autocare.Views.Website.website_details;
 import com.example.amila.autocare.Views.offers.ViewOffers;
 import com.example.amila.autocare.Views.search_for_places.searchForPlaces;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -173,12 +173,6 @@ public class navigationDrawer extends AppCompatActivity
         if (id == R.id.edit_vehicle) {
             Intent intent =   new Intent(getApplicationContext(),add_edit_vehicle.class);
             startActivity(intent);
-        } else if (id == R.id.logout) {
-            FirebaseAuth.getInstance().signOut();
-            finish();
-            Intent intent =   new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(intent);
-
         }else if(id==R.id.search_for_places){
             Intent intent =   new Intent(getApplicationContext(),searchForPlaces.class);
             startActivity(intent);
@@ -190,6 +184,9 @@ public class navigationDrawer extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.view_offers) {
             Intent intent = new Intent(getApplicationContext(), ViewOffers.class);
+            startActivity(intent);
+        } else if (id == R.id.website_details) {
+            Intent intent = new Intent(getApplicationContext(), website_details.class);
             startActivity(intent);
         }
 
