@@ -144,21 +144,13 @@ public class ViewExpense extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        expenseDAO.getExpensesByDate(from, to).observe(this, new Observer<List<Expenses>>() {
+        expenseDAO.getExpensesByDate(from, to, selectVehicle.getSelectedItem().toString()).observe(this, new Observer<List<Expenses>>() {
             @Override
             public void onChanged(@Nullable List<Expenses> expenses) {
                 PieChart chart = findViewById(R.id.chart);
                 RecyclerView rv = findViewById(R.id.recycler_view_expenses);
                 rv.setVisibility(View.VISIBLE);
                 chart.setVisibility(View.INVISIBLE);
-                /*rv.setHasFixedSize(true);
-
-                // use a linear layout manager
-                LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                rv.setLayoutManager(mLayoutManager);
-                rv.addItemDecoration(new navigationDrawer.GridSpacingItemDecoration(2, dpToPx(10), true));
-                rv.setItemAnimator(new DefaultItemAnimator());*/
-                // specify an adapter (see also next example)
                 MyAdapter mAdapter = new MyAdapter(expenses, activity, getApplicationContext());
                 rv.setAdapter(mAdapter);
             }

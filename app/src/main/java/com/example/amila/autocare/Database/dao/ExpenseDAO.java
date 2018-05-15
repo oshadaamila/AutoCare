@@ -23,8 +23,8 @@ public interface ExpenseDAO {
     @Query("select category,sum(expense) as sum from expenses where reg_no =:Reg_NO group by category")
     LiveData<List<CategorySum>> getCategoriesAndSums(String Reg_NO);
 
-    @Query("SELECT * FROM expenses WHERE date BETWEEN :from AND :to")
-    LiveData<List<Expenses>> getExpensesByDate(Date from, Date to);
+    @Query("SELECT * FROM expenses WHERE date BETWEEN :from AND :to AND reg_no=:Reg_NO")
+    LiveData<List<Expenses>> getExpensesByDate(Date from, Date to, String Reg_NO);
 
     @Query("DELETE FROM expenses WHERE expense_id=:id")
     void deleteExpense(String id);

@@ -12,10 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="120dp"
         android:text="-select date-"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView20"
         app:layout_constraintStart_toEndOf="@+id/textView18"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,11 +26,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
         android:layout_toEndOf="@+id/textView20"
         android:text="-select date-"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
         app:layout_constraintStart_toEndOf="@+id/textView20" />
 
     <TextView
@@ -46,8 +51,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="120dp"
         android:layout_toEndOf="@+id/textView_from_date"
         android:text="To"
         android:textSize="18sp"
@@ -56,11 +61,11 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="281dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="307dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginLeft="28dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="52dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -94,64 +99,33 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Select Vehicle"
         android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner_vehicle"
         android:layout_width="178dp"
         android:layout_height="27dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="400dp"
-        android:layout_height="321dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="188dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="42dp"
-            android:visibility="invisible" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_expenses"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="23dp"
-            android:scrollbars="vertical"
-            android:visibility="invisible" />
-
-    </RelativeLayout>
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="114dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginLeft="152dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="84dp"
         android:text="Select Date Range"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -163,14 +137,47 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/recycler_view_expenses"
         android:layout_alignParentStart="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="156dp"
         android:background="@color/cast_intro_overlay_button_background_color"
         android:text="Show"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView_to_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="321dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="204dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="28dp"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_expenses"
+        android:layout_width="368dp"
+        android:layout_height="417dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="220dp"
+        android:scrollbars="vertical"
+        android:visibility="invisible"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

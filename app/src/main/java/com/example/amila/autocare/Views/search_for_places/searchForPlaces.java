@@ -50,11 +50,18 @@ public class searchForPlaces extends FragmentActivity implements
     private Location mLastLocation;
     private  Marker mCurrLocationMarker;
     private LatLng mLatLng;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkConnectivity();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_for_places);
-        if(checkInternetConnectivity()){
+        if (checkInternetConnectivity() && checkGPS()) {
             spinnerCateogary = findViewById(R.id.spinnerCateogary);
             spinnerCateogary.setOnItemSelectedListener(this);
             //set the spinner values
@@ -66,13 +73,27 @@ public class searchForPlaces extends FragmentActivity implements
             //check for internet connectivity and gps service before proceed
             CheckGooglePlayServices();
 
-            checkGPS();
+            //checkGPS();
         }else{
-            checkInternetConnectivity();
-            //this.finish();
+            checkConnectivity();
+
         }
 
     }
+
+    private void checkConnectivity() {
+        if (!checkInternetConnectivity()) {
+            checkInternetConnectivity();
+        } else if (!checkGPS()) {
+            checkGPS();
+            finish();
+        } else {
+            checkGPS();
+            checkInternetConnectivity();
+            finish();
+        }
+    }
+
     private void setSpinnerValues(){
         String[] cateogaries = {"Service Center", "Tyre Service Center", "Spare Part Store"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,cateogaries);
@@ -185,7 +206,8 @@ public class searchForPlaces extends FragmentActivity implements
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
     }
-    public void checkGPS(){
+
+    public boolean checkGPS() {
        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         if( !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -203,7 +225,9 @@ public class searchForPlaces extends FragmentActivity implements
                 }
             });
             builder.create().show();
-            return;
+            return false;
+        } else {
+            return true;
         }
     }
     public boolean checkInternetConnectivity(){
