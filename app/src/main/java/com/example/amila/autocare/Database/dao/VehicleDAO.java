@@ -50,4 +50,7 @@ public interface VehicleDAO {
 
     @Query("UPDATE Vehicle SET next_service_date = :value WHERE reg_no=:nextServiceDate")
     void updateNextServiceDate(String value, String nextServiceDate);
+
+    @Query("DELETE FROM Vehicle WHERE reg_no=:Reg_NO ")
+    void deleteVehicle(String Reg_NO);
 }

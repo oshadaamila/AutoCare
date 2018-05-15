@@ -38,22 +38,6 @@ public class ViewVehicle extends AppCompatActivity {
         tv_mileage = findViewById(R.id.textView_mileage);
         tv_brand = findViewById(R.id.textView_brand);
         delete = findViewById(R.id.delete_vehicle_btn);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                Fragment prev = getFragmentManager().findFragmentByTag("dialog");
-                if (prev != null) {
-                    ft.remove(prev);
-                }
-                ft.addToBackStack(null);
-
-                // Create and show the dialog.
-                DeleteDialog newFragment = new DeleteDialog();
-
-                newFragment.show(ft, "dialog");
-            }
-        });
         vehicle = getVehicle(reg_no);
 
 
@@ -133,6 +117,23 @@ public class ViewVehicle extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         openDialog(vehicle[0].getReg_no(), "mileage", vehicle[0].getMileage());
+                    }
+                });
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                        if (prev != null) {
+                            ft.remove(prev);
+                        }
+                        ft.addToBackStack(null);
+                        // Create and show the dialog.
+                        DeleteDialog newFragment = new DeleteDialog();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("reg_no", vehicle[0].getReg_no());
+                        newFragment.setArguments(bundle);
+                        newFragment.show(ft, "dialog");
                     }
                 });
             }
