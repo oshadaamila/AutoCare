@@ -81,11 +81,12 @@
         layout="@layout/home_content" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/fab_add_vehicle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:tint="@android:color/white"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="bottom|right"
         app:srcCompat="@drawable/ic_add_circle_outline" />

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -40,15 +41,16 @@ import java.util.List;
 public class navigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
         AppDatabase database;
-        List<Vehicle> vehicleList;
         private RecyclerView recyclerView;
         private VehicleAdapter vehicleAdapter;
+    private FloatingActionButton addVehicle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        addVehicle = findViewById(R.id.fab_add_vehicle);
         database= AppDatabase.getAppDatabase(getApplicationContext());
         setSupportActionBar(toolbar);
 
@@ -59,6 +61,13 @@ public class navigationDrawer extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        addVehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), add_edit_vehicle.class);
+                startActivity(intent);
+            }
+        });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -71,30 +80,6 @@ public class navigationDrawer extends AppCompatActivity
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         reloadRecycleView();
-        /*AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                vehicleList = (List<Vehicle>) database.vehicledao().getAll();
-                Log.d("async","this code executed");
-                if(vehicleList.size()==0){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),"Add a vehicle first",Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-                }else {
-                    vehicleAdapter = new VehicleAdapter(getApplicationContext(), vehicleList);
-                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 1);
-                    recyclerView.setLayoutManager(mLayoutManager);
-                    recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    recyclerView.setAdapter(vehicleAdapter);
-                }
-            }
-
-        });*/
     }
 
     private void reloadRecycleView() {

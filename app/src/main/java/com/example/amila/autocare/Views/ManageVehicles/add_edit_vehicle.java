@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -42,13 +43,6 @@ public class add_edit_vehicle extends AppCompatActivity {
         scheduleclient3 = new ScheduleClient(this);
         scheduleclient3.doBindService();
 
-       /* ArrayList<String> modellist = new ArrayList<String>();
-        Object[] DataTransfer = new Object[2];
-        DataTransfer[0] =modellist;
-        DataTransfer[1]=findViewById(R.id.textViewModel);
-        getBrands getbrands = new getBrands(getApplicationContext(),add_edit_vehicle.this);
-        getbrands.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,DataTransfer);*/
-
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.vehicle_brands, android.R.layout.simple_spinner_item);
@@ -65,7 +59,7 @@ public class add_edit_vehicle extends AppCompatActivity {
         tv_next_service = findViewById(R.id.next_service);
         tv_name=findViewById(R.id.editTextName);
         tv_mileage = findViewById(R.id.editTextMileage);
-
+        tv_reg_no_letters.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         findViewById(R.id.button_submit).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +117,7 @@ public class add_edit_vehicle extends AppCompatActivity {
                             }
                         }
                     });
+                    finish();
 
                  }
 
