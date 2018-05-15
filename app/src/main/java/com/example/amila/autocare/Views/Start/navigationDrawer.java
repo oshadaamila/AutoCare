@@ -1,10 +1,11 @@
 package com.example.amila.autocare.Views.Start;
 
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
@@ -64,10 +65,16 @@ public class navigationDrawer extends AppCompatActivity
         initCollapsingToolbar();
 
         recyclerView = findViewById(R.id.recycler_view);
-        AsyncTask.execute(new Runnable() {
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 1);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        reloadRecycleView();
+        /*AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                vehicleList = database.vehicledao().getAll();
+                vehicleList = (List<Vehicle>) database.vehicledao().getAll();
                 Log.d("async","this code executed");
                 if(vehicleList.size()==0){
                     runOnUiThread(new Runnable() {
@@ -87,14 +94,32 @@ public class navigationDrawer extends AppCompatActivity
                 }
             }
 
-        });
-
-
-
-
-
-
+        });*/
     }
+
+    private void reloadRecycleView() {
+        database.vehicledao().getAll().observe(this, new Observer<List<Vehicle>>() {
+            @Override
+            public void onChanged(@Nullable List<Vehicle> vehicleList) {
+                Log.d("async", "this code executed");
+                if (vehicleList.size() == 0) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Add a vehicle first", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    vehicleAdapter = new VehicleAdapter(getApplicationContext(), vehicleList);
+                    recyclerView.setAdapter(vehicleAdapter);
+
+                } else {
+                    vehicleAdapter = new VehicleAdapter(getApplicationContext(), vehicleList);
+                    recyclerView.setAdapter(vehicleAdapter);
+                }
+            }
+        });
+    }
+
 
     /**
      * Converting dp to pixel
@@ -167,7 +192,7 @@ public class navigationDrawer extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-
+        reloadRecycleView();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

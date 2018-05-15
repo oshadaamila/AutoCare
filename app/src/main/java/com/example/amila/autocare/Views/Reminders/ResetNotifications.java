@@ -25,19 +25,18 @@ public class ResetNotifications extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if ("android.intent.action.AIRPLANE_MODE".equals(intent.getAction())) {
+        if ("android.intent.action.RECEIVE_BOOT_COMPLETED".equals(intent.getAction())) {
             ////// reset your alrarms here
             Toast.makeText(context, "Testing 123", Toast.LENGTH_LONG).show();
             appDatabase = AppDatabase.getAppDatabase(context);
             final Context mContext = context;
-            final ScheduleClient scheduleClient = new ScheduleClient(mContext);
+
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    vehicleList = appDatabase.vehicledao().getAll();
+                    vehicleList = (List<Vehicle>) appDatabase.vehicledao().getAll();
                     for (Vehicle x : vehicleList) {
                         String date = x.getInsurance_expiry_date();
-                        //scheduleClient.setAlarmForNotification(dateStringConverter(x.getInsurance_expiry_date()), "Insurance Expiry", x.getReg_no_number(), x.getReg_no(), 1);
                         new AlarmTask(mContext, dateStringConverter(x.getInsurance_expiry_date()), "Insurance Expiry", x.getReg_no_number(), x.getReg_no(), 1).run();
 
                     }

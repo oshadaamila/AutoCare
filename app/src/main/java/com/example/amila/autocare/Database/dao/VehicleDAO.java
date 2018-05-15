@@ -16,7 +16,7 @@ import java.util.List;
 public interface VehicleDAO {
 
     @Query("SELECT * FROM Vehicle")
-    List<Vehicle> getAll();
+    LiveData<List<Vehicle>> getAll();
 
     @Query("SELECT reg_no FROM Vehicle")
     LiveData<List<String>> getAllRegNO();
