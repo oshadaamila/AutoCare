@@ -1,6 +1,6 @@
 package com.example.amila.autocare;
 
-import com.example.amila.autocare.Views.search_for_places.searchForPlaces;
+import com.example.amila.autocare.Controllers.search_for_places.searchForPlaces;
 
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class searchForPlacesTest {
     public void getUrlisCorrect() throws Exception {
 
         String returnedURl = sFP.getUrl(4.2563, 5.2658, "gas_station");
-        String corectURl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=4.2563,5.2658&radius=2000&type=gas_station&key=AIzaSyAGEmXKuOc06L38gc0btsc8m0XS09z1-NM";
+        String corectURl = "https://troppo-parachutes.000webhostapp.com/includes/get_nearby_stores.php?lat=4.2563&lng=5.2658&category=gas_station";
         assertEquals(returnedURl, corectURl);
     }
 

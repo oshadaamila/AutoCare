@@ -31,18 +31,18 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name=".Views.Reminders.NotifyService" />
-        <service android:name=".Views.Reminders.ScheduleService" />
+        <service android:name=".Controllers.Reminders.NotifyService" />
+        <service android:name=".Controllers.Reminders.ScheduleService" />
 
         <activity
-            android:name=".Views.Start.MainActivity"
+            android:name=".Controllers.Start.MainActivity"
             android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Views.Start.signup"
+            android:name=".Controllers.Start.signup"
             android:launchMode="singleInstance"
             android:theme="@style/autocare">
             <intent-filter>
@@ -50,28 +50,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Views.Start.home"
+            android:name=".Controllers.Start.home"
             android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Views.Start.profile"
+            android:name=".Controllers.Start.profile"
             android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Views.Start.phone_number_request"
+            android:name=".Controllers.Start.phone_number_request"
             android:theme="@style/autocare">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Views.Start.navigationDrawer"
+            android:name=".Controllers.Start.navigationDrawer"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -80,22 +80,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.ManageVehicles.add_edit_vehicle">
+        <activity android:name=".Controllers.ManageVehicles.add_edit_vehicle">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Views.search_for_places.searchForPlaces"
+            android:name=".Controllers.search_for_places.searchForPlaces"
             android:label="@string/title_activity_search_for_places" />
-        <activity android:name=".Views.Reminders.ReminderActivity" />
-        <activity android:name=".Views.Expenses.add_expense" />
-        <activity android:name=".Views.ManageVehicles.ViewVehicle" />
-        <activity android:name=".Views.Expenses.ViewExpense" />
-        <activity android:name=".Views.offers.ViewOffers" />
+        <activity android:name=".Controllers.Reminders.ReminderActivity" />
+        <activity android:name=".Controllers.Expenses.add_expense" />
+        <activity android:name=".Controllers.ManageVehicles.ViewVehicle" />
+        <activity android:name=".Controllers.Expenses.ViewExpense" />
+        <activity android:name=".Controllers.offers.ViewOffers" />
 
         <receiver
-            android:name=".Views.Reminders.ResetNotifications"
+            android:name=".Controllers.Reminders.ResetNotifications"
             android:enabled="true"
             android:exported="true"
             android:label="ResetNotifications">
@@ -104,8 +104,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Views.Website.website_details" />
-        <activity android:name=".Views.offers.ShowStore"></activity>
+        <activity android:name=".Controllers.Website.website_details" />
+        <activity android:name=".Controllers.offers.ShowStore"></activity>
     </application>
 
 </manifest>

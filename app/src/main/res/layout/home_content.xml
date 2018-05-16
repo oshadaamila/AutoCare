@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/viewBg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Views.Start.navigationDrawer"
+    tools:context=".Controllers.Start.navigationDrawer"
     tools:showIn="@layout/activity_main">
 
     <android.support.v7.widget.RecyclerView

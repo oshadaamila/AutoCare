@@ -5,7 +5,7 @@
     android:id="@+id/text_view_reminder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.Reminders.ReminderActivity">
+    tools:context=".Controllers.Reminders.ReminderActivity">
 
     <TextView
         android:id="@+id/textView_title"

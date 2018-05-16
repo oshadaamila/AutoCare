@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.Expenses.add_expense">
+    tools:context=".Controllers.Expenses.add_expense">
 
     <LinearLayout
         android:layout_width="344dp"
