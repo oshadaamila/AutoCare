@@ -61,7 +61,7 @@ public class DataParserForOffer {
     }
 
     private Offer getOffer(JSONObject googlePlaceJson) {
-        String title, description, store_name;
+        String title, description, store_name, lat, lng;
         Offer offer = new Offer();
 
         Log.d("getPlace", "Entered");
@@ -70,10 +70,13 @@ public class DataParserForOffer {
             title = googlePlaceJson.getString("title");
             description = googlePlaceJson.getString("details");
             store_name = googlePlaceJson.getString("name");
+            lat = googlePlaceJson.getString("lat");
+            lng = googlePlaceJson.getString("lng");
             offer.setTitle(title);
             offer.setDescription(description);
             offer.setStore_name(store_name);
-
+            offer.setStore_lat(lat);
+            offer.setStore_lng(lng);
             Log.d("getPlace", "Putting Places");
         } catch (JSONException e) {
             Log.d("getPlace", "Error");

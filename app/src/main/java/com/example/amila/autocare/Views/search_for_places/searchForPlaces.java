@@ -54,7 +54,8 @@ public class searchForPlaces extends FragmentActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        checkConnectivity();
+
+
     }
 
     @Override
@@ -86,11 +87,8 @@ public class searchForPlaces extends FragmentActivity implements
             checkInternetConnectivity();
         } else if (!checkGPS()) {
             checkGPS();
-            finish();
-        } else {
-            checkGPS();
-            checkInternetConnectivity();
-            finish();
+            //finish();
+
         }
     }
 

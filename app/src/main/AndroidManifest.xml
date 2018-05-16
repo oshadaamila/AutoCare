@@ -104,7 +104,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Views.Website.website_details"></activity>
+        <activity android:name=".Views.Website.website_details" />
+        <activity android:name=".Views.offers.ShowStore"></activity>
     </application>
 
 </manifest>

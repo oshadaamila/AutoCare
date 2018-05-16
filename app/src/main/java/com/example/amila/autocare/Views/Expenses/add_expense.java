@@ -95,6 +95,7 @@ public class add_expense extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addExpense(date.getText().toString());
+                date.setText(null);
                 recreate();
             }
         });

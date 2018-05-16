@@ -55,7 +55,7 @@ public class GetNearbyOffers extends AsyncTask<Object, String, String> {
     }
 
     private void ShowOfferLIst(List<Offer> nearbyOfferList) {
-        OfferAdapter offerAdapter = new OfferAdapter(nearbyOfferList);
+        OfferAdapter offerAdapter = new OfferAdapter(nearbyOfferList, mcontext);
         rv.setAdapter(offerAdapter);
     }
 }
