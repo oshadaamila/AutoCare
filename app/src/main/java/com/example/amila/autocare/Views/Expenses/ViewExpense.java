@@ -139,8 +139,8 @@ public class ViewExpense extends AppCompatActivity {
         Date to = null;
         Date from = null;
         try {
-            from = new SimpleDateFormat("d-M-y").parse(fromDate.getText().toString());
-            to = new SimpleDateFormat("d-M-y").parse(toDate.getText().toString());
+            from = new SimpleDateFormat("d/M/y").parse(fromDate.getText().toString());
+            to = new SimpleDateFormat("d/M/y").parse(toDate.getText().toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -196,7 +196,7 @@ public class ViewExpense extends AppCompatActivity {
     private void setDates() {
         Calendar c = Calendar.getInstance();
         Date today = c.getTime();
-        DateFormat df = new SimpleDateFormat("d-M-y");
+        DateFormat df = new SimpleDateFormat("d/M/y");
         String date = df.format(today).toString();
         toDate.setText(date);
         fromDate.setText(date);

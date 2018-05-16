@@ -40,7 +40,7 @@ public class UpdateDate extends DialogFragment implements DatePickerDialog.OnDat
     public void onDateSet(final DatePicker view, int year, int month, int dayOfMonth) {
         //TextView tv1 = getActivity().findViewById(id);
         int month2 = view.getMonth() + 1;
-        tv.setText(view.getDayOfMonth() + "-" + month2 + "-" + view.getYear());
+        tv.setText(view.getDayOfMonth() + "/" + month2 + "/" + view.getYear());
         dismiss();
     }
 

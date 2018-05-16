@@ -52,7 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        DateFormat df = new SimpleDateFormat("d-M-y");
+        DateFormat df = new SimpleDateFormat("d/M/y");
 
         String date = df.format(mDataset.get(position).getDate());
         holder.category.setText(mDataset.get(position).getCategory());

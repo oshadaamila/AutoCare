@@ -1,5 +1,6 @@
 package com.example.amila.autocare;
 
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -48,7 +49,8 @@ public class add_edit_vehicle_test {
         // Type text and then press the button.
         onView(withId(R.id.editTextName))
                 .perform(typeText(vehicle_name), closeSoftKeyboard());
-        //onView(withId(R.id.changeTextBt)).perform(click());
+        //onView(withId(R.id.insurance_date)).perform(ViewActions.click());
+        onView(withId(R.id.next_service)).perform(ViewActions.click());
 
         // Check that the text was changed.
         //onView(withId(R.id.textToBeChanged))

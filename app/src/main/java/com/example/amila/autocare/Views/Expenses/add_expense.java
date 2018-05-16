@@ -59,7 +59,7 @@ public class add_expense extends AppCompatActivity {
         expenseDAO = appDatabase.expensedao();
         loadSpinnerData();
         Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         //String formattedDate = df.format(c);
         date.setText(df.format(c));
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -95,7 +95,7 @@ public class add_expense extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addExpense(date.getText().toString());
-                date.setText(null);
+                amount.setText("");
                 recreate();
             }
         });
@@ -104,7 +104,7 @@ public class add_expense extends AppCompatActivity {
 
     private void addExpense(String date) {
         Calendar c = Calendar.getInstance();
-        String pattern = "d-M-y";
+        String pattern = "d/M/y";
         Date date1 = null;
         String time = null;
         try {

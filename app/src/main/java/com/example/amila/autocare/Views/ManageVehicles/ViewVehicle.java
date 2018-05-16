@@ -143,14 +143,16 @@ public class ViewVehicle extends AppCompatActivity {
 
 
     private void setValues(Vehicle vehicle) {
-        tv_name2.setText(vehicle.getName());
-        tv_brand.setText(vehicle.getBrand());
-        tv_model.setText(vehicle.getModel());
-        tv_insurance_date.setText(vehicle.getInsurance_expiry_date());
-        tv_revenue_license_expiry.setText(vehicle.getRevenue_license_expiry_date());
-        tv_next_service.setText(vehicle.getNext_service_date());
-        tv_mileage.setText(vehicle.getMileage());
-        tv_reg_no.setText(vehicle.getReg_no());
+        if (vehicle != null) {
+            tv_name2.setText(vehicle.getName());
+            tv_brand.setText(vehicle.getBrand());
+            tv_model.setText(vehicle.getModel());
+            tv_insurance_date.setText(vehicle.getInsurance_expiry_date());
+            tv_revenue_license_expiry.setText(vehicle.getRevenue_license_expiry_date());
+            tv_next_service.setText(vehicle.getNext_service_date());
+            tv_mileage.setText(vehicle.getMileage());
+            tv_reg_no.setText(vehicle.getReg_no());
+        }
     }
 
     private void openDialog(String reg_no, String field, String value) {

@@ -85,7 +85,7 @@ public class EditExpense extends DialogFragment {
             public void onClick(View v) {
                 Date dte1 = null;
                 try {
-                    dte1 = new SimpleDateFormat("d-M-y").parse(date.getText().toString());
+                    dte1 = new SimpleDateFormat("d/M/y").parse(date.getText().toString());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

@@ -57,6 +57,7 @@ public class EditDialog extends DialogFragment {
                             appDatabase.vehicledao().updateModel(editText.getText().toString().trim(), reg_no);
                         } else if (field.equals("reg_no")) {
                             appDatabase.vehicledao().updateRegNO(editText.getText().toString().trim(), reg_no);
+                            viewvehicle.finish();
                         } else if (field.equals("mileage")) {
                             appDatabase.vehicledao().updateMileage(editText.getText().toString().trim(), reg_no);
                         }
