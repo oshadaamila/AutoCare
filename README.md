@@ -4,24 +4,23 @@ Simple Android application which can be used to manage your vehicle details
 Use Cases
 
 1. Add your own vehicles to the app to maintain their details.
-
-![User Interface](https://drive.google.com/file/d/1r5KL77v8I4dUSw3buFx_zV8A09Z3EudM/view?usp=sharing)
-![User Interface](https://drive.google.com/file/d/1ChHCswV_3YakSOCL46LxELzslcopTiYD/view?usp=sharing)
+<img src=https://raw.githubusercontent.com/oshadaamila/AutoCare/oshadaamila-readme-images/20180531_134201%20(1).jpg width="230" height="400" />
+<img src=https://raw.githubusercontent.com/oshadaamila/AutoCare/oshadaamila-readme-images/20180531_134049.jpg width="230" height="400"/>
 
 
 2. Get reminders on next service date.
 
-![User Interface](https://drive.google.com/file/d/1xuIFdw1_YvFmuYXVsPMY93wAWVIzl3zh/view?usp=sharing)
+<img src=https://raw.githubusercontent.com/oshadaamila/AutoCare/oshadaamila-readme-images/20180531_134235.jpg width="230" height="400"/>
 
 3. Get offers from related merchants
 
-![User Interface](https://drive.google.com/file/d/1qgiH31qhSGu1fOdXYROS5Q9IVcX5-fXI/view?usp=sharing)
+<img src=https://raw.githubusercontent.com/oshadaamila/AutoCare/oshadaamila-readme-images/view%20offers.jpg width="230" height="400"/>
 
 4. View nearest merchants
 
-![User Interface](https://drive.google.com/file/d/1GOEaNd0877J1ssDp-6mwo81sugNLGvds/view?usp=sharing)
+<img src=https://raw.githubusercontent.com/oshadaamila/AutoCare/oshadaamila-readme-images/near%20by%20stores.jpg width="230" height="400"/>
 
 5. Manage vehicle related expenses
 
-![User Interface](https://drive.google.com/file/d/15EW-hpqUxZ6ZnLKBY6dAfh9sRKeuinyl/view?usp=sharing)
+<img src=https://raw.githubusercontent.com/oshadaamila/AutoCare/oshadaamila-readme-images/View%20Expenses.jpg width="230" height="400"/>
 
